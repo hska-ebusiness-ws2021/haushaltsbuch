@@ -2,8 +2,6 @@ package com.example.haushaltsbuch.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.haushaltsbuch.data.LoginDataSource
-import com.example.haushaltsbuch.data.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.
