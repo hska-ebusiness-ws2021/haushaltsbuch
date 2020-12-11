@@ -5,7 +5,7 @@ import java.util.*
 
 data class Expense (
         val id: ExpenseId,
-        val amount: Currency,
+        val amount: Int,
         val merchant: Merchant,
         val points: Int,
         val category: Category,

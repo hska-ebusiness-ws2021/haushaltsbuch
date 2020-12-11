@@ -4,7 +4,7 @@ import java.util.*
 
 class SubscriptionModel (
         val name: String,
-        val price: Currency,
+        val price: Int,
         val billingInterval: BillingInterval
         ) {
 }

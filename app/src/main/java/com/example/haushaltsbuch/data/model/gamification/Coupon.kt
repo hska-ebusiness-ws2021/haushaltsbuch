@@ -1,6 +1,6 @@
 package com.example.haushaltsbuch.data.model.gamification
 
-import android.app.Person
+import com.example.haushaltsbuch.data.model.persons.Person
 import java.util.*
 
 class Coupon(
