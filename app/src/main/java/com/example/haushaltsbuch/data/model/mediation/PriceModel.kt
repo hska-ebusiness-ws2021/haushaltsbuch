@@ -4,9 +4,9 @@ import com.example.haushaltsbuch.data.model.persons.BillingInterval
 import java.util.*
 
 class PriceModel(
-        val price: Currency,
+        val price: Int,
         val isSubscription: Boolean,
-        val interval: BillingInterval
+        val interval: BillingInterval?,
         ) {
 }
 
