@@ -1,6 +1,6 @@
 package com.example.haushaltsbuch.data.model.mediation
 
-import android.app.Person
+import com.example.haushaltsbuch.data.model.persons.Person
 
 class Request(
         val person: Person,

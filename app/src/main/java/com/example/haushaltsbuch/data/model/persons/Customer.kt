@@ -14,7 +14,7 @@ class Customer(
         val dateOfBirth: Date,
         val subscription: SubscriptionModel,
         val friend: Friend,
-        val achievements: List<Achievement>
+        val achievements: MutableList<Achievement>
         ) : Person(
         id, email, firstname, lastname, address, user
                 ){}
