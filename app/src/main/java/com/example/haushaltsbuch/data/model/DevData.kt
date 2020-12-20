@@ -33,7 +33,7 @@ class FakeData (
     private val offerCount: Int = 20,
     private val requestCount: Int = 40,
     ){
-    
+
     val customerCount = peopleCount - companyCount
 
 // Data
@@ -55,34 +55,35 @@ class FakeData (
     val pricemodels = List<PriceModel>(offerCount, ::generatePriceModel)
     val offers = List<Offer>(offerCount, ::generateOffer)
     val requests = List<Request>(requestCount, ::generateRequest)
-    
+
 
     private fun generatePerson(index: Int): Person  {
         val name = faker.name.firstName()
         val surname = faker.name.lastName()
         val domain = faker.company.name()
         return Person(
-                id = UUID.randomUUID(),
-                firstname = name,
-                lastname = surname,
-                email ="$name.$surname@$domain.de",
-                address = addresses[index/(peopleCount/addressCount)],
-                user = users[index],
+            id = UUID.randomUUID(),
+            firstname = name,
+            lastname = surname,
+            email = "$name.$surname@$domain.de",
+            address = addresses[Random.nextInt(0, addressCount -1)],
+            user = users[index],
 
-    )}
+            )
+    }
 
     private fun generateAddress(index: Int): Address {
         return Address(
-                postCode = postCode[index/(addressCount/postcodeCount)],
-                street = street[index/(addressCount/streetcount)],
-                person = null,
+            postCode = postCode[Random.nextInt(0, postcodeCount - 1)],
+            street = street[Random.nextInt(0, streetcount - 1)],
+            person = null,
         )
     }
 
     private fun generatePostCode(index: Int): PostCode {
         return PostCode(
-                postCode = faker.address.postcode(),
-                location = locations[index/(postcodeCount/locationCount)],
+            postCode = faker.address.postcode(),
+            location = locations[Random.nextInt(0, locationCount -1)],
         )
     }
 
@@ -92,9 +93,9 @@ class FakeData (
 
     private fun generateStreet(index: Int): Street {
         return Street(
-                name = faker.address.streetName(),
-                houseNumber = index.toString(),
-                additionalInfo = null,
+            name = faker.address.streetName(),
+            houseNumber = index.toString(),
+            additionalInfo = null,
         )
     }
 
@@ -110,9 +111,9 @@ class FakeData (
         return listOf(listOf( Role.STANDARD), listOf( Role.PREMIUM))
     }
 
-    private fun generateFriend(index: Int): Friend{
+    private fun generateFriend(index: Int): Friend {
         return Friend(
-                person = people[index]
+            person = people[index]
         )
     }
 
@@ -142,16 +143,16 @@ class FakeData (
                 name = "STANDARD",
                 price = BigDecimal(0),
                 billingInterval = BillingInterval.YEARLY,
-                ),
-                SubscriptionModel(
-                        name = "PREMIUM",
-                        price = BigDecimal(500),
-                        billingInterval = BillingInterval.YEARLY
-                ),
+            ),
+            SubscriptionModel(
+                name = "PREMIUM",
+                price = BigDecimal(500),
+                billingInterval = BillingInterval.YEARLY
+            ),
         )
     }
 
-    private fun generateCompany(index: Int): Company{
+    private fun generateCompany(index: Int): Company {
         return Company(
                 id = people[index+customerCount].id,
                 name = faker.company.name(),
@@ -164,9 +165,9 @@ class FakeData (
 
     }
 
-    private fun generateExpense(customerIndex: Int): (Int)->Expense {
+    private fun generateExpense(customerIndex: Int): (Int) -> Expense {
         return expense@{ index ->
-            val amount = Random.nextInt(1,50000)
+            val amount = Random.nextInt(1, 50000)
             return@expense Expense(
                     id = UUID.randomUUID(),
                     amount = BigDecimal(amount),
@@ -197,10 +198,10 @@ class FakeData (
 
     private fun generateAchievement(index: Int): Achievement {
         return Achievement(
-                id = UUID.randomUUID(),
-                name = faker.funnyName.name(),
-                description = faker.greekPhilosophers.quotes(),
-                isAchieved = false,
+            id = UUID.randomUUID(),
+            name = faker.funnyName.name(),
+            description = faker.greekPhilosophers.quotes(),
+            isAchieved = false,
         )
     }
 
@@ -215,13 +216,13 @@ class FakeData (
 
     private fun generatePriceModel(index: Int): PriceModel {
         return PriceModel(
-                price = BigDecimal(Random.nextInt(1,10000)),
-                isSubscription = Random.nextBoolean(),
-                interval = listOf<BillingInterval?>(
-                        BillingInterval.YEARLY,
-                        BillingInterval.MONTHLY,
-                        null
-                )[Random.nextInt(0,2)]
+            price = BigDecimal(Random.nextInt(1, 10000)),
+            isSubscription = Random.nextBoolean(),
+            interval = listOf<BillingInterval?>(
+                BillingInterval.YEARLY,
+                BillingInterval.MONTHLY,
+                null
+            )[Random.nextInt(0, 2)]
         )
     }
 
