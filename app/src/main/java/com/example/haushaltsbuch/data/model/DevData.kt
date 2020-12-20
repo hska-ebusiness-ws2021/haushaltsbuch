@@ -12,6 +12,7 @@ import com.example.haushaltsbuch.data.model.persons.*
 import io.github.serpro69.kfaker.Faker
 import io.github.serpro69.kfaker.FakerConfig
 import io.github.serpro69.kfaker.create
+import java.math.BigDecimal
 import java.util.*
 import kotlin.random.Random
 
@@ -19,70 +20,44 @@ val fakerConfig = FakerConfig.builder().create { locale = "de" }
 
 val faker = Faker(fakerConfig)
 
-class FakeData(){
-    // Data
-    var people: MutableList<Person>? = null
-    var addresses: MutableList<Address>? = null
-    var postCode: MutableList<PostCode>? = null
-    var street: MutableList<Street>? = null
-    var users: MutableList<User>? = null
-    var roles: MutableList<MutableList<Role>>? = null
-    var friends: MutableList<Friend>? = null
-    var locations: MutableList<Location>? = null
-
-    var customers: MutableList<Customer>? = null
-    var companies: MutableList<Company>? = null
-    var subscriptionModel: MutableList<SubscriptionModel>? = null
-
-    var expenses: MutableList<MutableList<Expense>>? = null
-    var expenseCategories: MutableList<Category>? = null
-
-    var coupon: MutableList<Coupon>? = null
-    var achievements: MutableList<Achievement>? = null
-
-    var requests: MutableList<Request>? = null
-    var offers: MutableList<Offer>? = null
-    var pricemodels: MutableList<PriceModel>? = null
-
-    // amount of Data
-    val addressCount = 50
-    val peopleCount = 50
-    val postcodeCount = 5
-    val streetcount = 10
-    val locationCount = 5
-    val companyCount = 10
+class FakeData (
+    private val addressCount: Int = 50,
+    private val peopleCount: Int = 50,
+    private val postcodeCount: Int = 5,
+    private val streetcount: Int = 10,
+    private val locationCount: Int = 5,
+    private val companyCount: Int = 10,
+    private val categoryCount: Int = 10,
+    private val couponCount: Int = 20,
+    private val achievementCount: Int = 20,
+    private val offerCount: Int = 20,
+    private val requestCount: Int = 40,
+    ){
+    
     val customerCount = peopleCount - companyCount
-    val categoryCount = 10
-    val couponCount = 20
-    val achievementCount = 20
-    val offerCount = 20
-    val requestCount = 40
 
-    // generate
+// Data
+    val locations = List<Location>(locationCount, ::generateLocation)
+    val postCode = List<PostCode>(postcodeCount, ::generatePostCode)
+    val street = List<Street>(streetcount, ::generateStreet)
+    val addresses = List<Address>(addressCount, ::generateAddress)
+    val roles = generateRoles()
+    val users = List(peopleCount, ::generateUser)
+    val people = List<Person>(peopleCount, ::generatePerson)
+    val friends = List<Friend>(peopleCount, ::generateFriend)
+    val subscriptions = generateSubscriptionModels()
+    val customers = List<Customer>(customerCount, ::generateCustomer)
+    val companies = List<Company>(companyCount, ::generateCompany)
+    val expenseCategories = List<Category>(categoryCount, ::generateCategory)
+    val expenses = List<List<Expense>>(customerCount, ::generateExpenseList)
+    val coupon = List<Coupon>(couponCount, ::generateCoupon)
+    val achievements = List<Achievement>(achievementCount, ::generateAchievement)
+    val pricemodels = List<PriceModel>(offerCount, ::generatePriceModel)
+    val offers = List<Offer>(offerCount, ::generateOffer)
+    val requests = List<Request>(requestCount, ::generateRequest)
+    
 
-    // main generate
-    fun generateData(){
-        locations = MutableList<Location>(locationCount, ::generateLocation)
-        postCode = MutableList<PostCode>(postcodeCount, ::generatePostCode)
-        street = MutableList<Street>(streetcount, ::generateStreet)
-        addresses = MutableList<Address>(50, ::generateAddress)
-        generateRoles()
-        users = MutableList(peopleCount, ::generateUser)
-        people = MutableList<Person>(peopleCount, ::generatePerson)
-        friends = MutableList<Friend>(peopleCount, ::generateFriend)
-        generateSubscriptionModels()
-        customers = MutableList<Customer>(customerCount, ::generateCustomer)
-        companies = MutableList<Company>(companyCount, ::generateCompany)
-        expenseCategories = MutableList<Category>(categoryCount, ::generateCategory)
-        expenses = MutableList<MutableList<Expense>>(customerCount, ::generateExpenseList)
-        coupon = MutableList<Coupon>(couponCount, ::generateCoupon)
-        achievements = MutableList<Achievement>(achievementCount, ::generateAchievement)
-        pricemodels = MutableList<PriceModel>(offerCount, ::generatePriceModel)
-        offers = MutableList<Offer>(offerCount, ::generateOffer)
-        requests = MutableList<Request>(requestCount, ::generateRequest)
-    }
-
-    fun generatePerson(index: Int): Person  {
+    private fun generatePerson(index: Int): Person  {
         val name = faker.name.firstName()
         val surname = faker.name.lastName()
         val domain = faker.company.name()
@@ -91,32 +66,31 @@ class FakeData(){
                 firstname = name,
                 lastname = surname,
                 email ="$name.$surname@$domain.de",
-                address = addresses!![index/(peopleCount/addressCount)],
-                user = users!![index],
+                address = addresses[index/(peopleCount/addressCount)],
+                user = users[index],
 
     )}
 
-    fun generateAddress(index: Int): Address {
+    private fun generateAddress(index: Int): Address {
         return Address(
-                postCode = postCode!![index/(addressCount/postcodeCount)],
-                street = street!![index/(addressCount/streetcount)],
+                postCode = postCode[index/(addressCount/postcodeCount)],
+                street = street[index/(addressCount/streetcount)],
                 person = null,
         )
     }
 
-    fun generatePostCode(index: Int): PostCode {
+    private fun generatePostCode(index: Int): PostCode {
         return PostCode(
                 postCode = faker.address.postcode(),
-                location = locations!![index/(postcodeCount/locationCount)],
+                location = locations[index/(postcodeCount/locationCount)],
         )
     }
 
-    fun generateLocation(index: Int): Location {
-        index
+    private fun generateLocation(index: Int): Location {
         return Location(name = faker.address.city())
     }
 
-    fun generateStreet(index: Int): Street {
+    private fun generateStreet(index: Int): Street {
         return Street(
                 name = faker.address.streetName(),
                 houseNumber = index.toString(),
@@ -124,99 +98,95 @@ class FakeData(){
         )
     }
 
-    fun generateUser(index: Int): User {
-        index
+    private fun generateUser(index: Int): User {
         return User(
                 username = faker.funnyName.name(),
                 password = "password",
-                role = roles!![Random.nextInt(0,1)],
+                role = roles[Random.nextInt(0,1)],
         )
     }
 
-    fun generateRoles(){
-        roles = mutableListOf(mutableListOf( Role.STANDARD), mutableListOf( Role.PREMIUM))
-        return
+    private fun generateRoles(): List<List<Role>>{
+        return listOf(listOf( Role.STANDARD), listOf( Role.PREMIUM))
     }
 
-    fun generateFriend(index: Int): Friend{
+    private fun generateFriend(index: Int): Friend{
         return Friend(
-                person = people!![index]
+                person = people[index]
         )
     }
 
-    fun generateCustomer(index: Int): Customer {
+    private fun generateCustomer(index: Int): Customer {
         return Customer(
-                id = people!![index].id,
-                email = people!![index].email,
-                firstname =  people!![index].firstname,
-                lastname = people!![index].lastname,
-                address = people!![index].address,
-                user = people!![index].user,
+                id = people[index].id,
+                email = people[index].email,
+                firstname =  people[index].firstname,
+                lastname = people[index].lastname,
+                address = people[index].address,
+                user = people[index].user,
                 backupInfo = "http://${faker.internet.domain()}.de",
                 dateOfBirth = Date(
                         Random.nextInt(1950,2015),
                         Random.nextInt(1,12),
                         Random.nextInt(1,30),
                 ),
-                subscription = subscriptionModel!![Random.nextInt(0,subscriptionModel!!.size-1)],
+                subscription = subscriptions[Random.nextInt(0,subscriptions.size-1)],
                 achievements = mutableListOf(),
-                friend = friends!![Random.nextInt(0,friends!!.size-1)],
+                friend = friends[Random.nextInt(0,friends.size-1)],
         )
     }
 
-    fun generateSubscriptionModels(){
-        subscriptionModel = mutableListOf(
+    private fun generateSubscriptionModels(): List<SubscriptionModel>{
+        return listOf(
                 SubscriptionModel(
                 name = "STANDARD",
-                price = 0,
+                price = BigDecimal(0),
                 billingInterval = BillingInterval.YEARLY,
                 ),
                 SubscriptionModel(
                         name = "PREMIUM",
-                        price = 500,
+                        price = BigDecimal(500),
                         billingInterval = BillingInterval.YEARLY
                 ),
         )
     }
 
-    fun generateCompany(index: Int): Company{
+    private fun generateCompany(index: Int): Company{
         return Company(
-                id = people!![index+customerCount].id,
+                id = people[index+customerCount].id,
                 name = faker.company.name(),
                 legalForm = "GmbH",
         )
     }
 
-    fun generateExpenseList(index: Int): MutableList<Expense>{
-        return MutableList(customerCount, this.generateExpense(index))
+    private fun generateExpenseList(index: Int): List<Expense>{
+        return List(customerCount, this.generateExpense(index))
 
     }
 
-    fun generateExpense(customerIndex: Int): (Int)->Expense {
+    private fun generateExpense(customerIndex: Int): (Int)->Expense {
         return expense@{ index ->
             val amount = Random.nextInt(1,50000)
             return@expense Expense(
                     id = UUID.randomUUID(),
-                    amount = amount,
+                    amount = BigDecimal(amount),
                     merchant = Merchant(faker.company.name()),
                     points = amount / 10,
-                    category = expenseCategories!![Random.nextInt(0,expenseCategories!!.size-1)],
-                    person = people!![customerIndex]
+                    category = expenseCategories[Random.nextInt(0,expenseCategories.size-1)],
+                    person = people[customerIndex]
             )
         }
     }
 
-    fun generateCategory(index: Int): Category {
-        index
+    private fun generateCategory(index: Int): Category {
         return Category(name = faker.company.industry())
     }
 
-    fun generateCoupon(index: Int): Coupon {
-        index
+    private fun generateCoupon(index: Int): Coupon {
         return Coupon(
-                person = people!![Random.nextInt(customerCount, peopleCount-1)],
+                person = people[Random.nextInt(customerCount, peopleCount-1)],
                 code = faker.commerce.promotionCode(),
-                minimumOrderValue = Random.nextInt(0,1000),
+                minimumOrderValue = BigDecimal(Random.nextInt(0,1000)),
                 expirationDate = Date(
                         Random.nextInt(2020,2030),
                         Random.nextInt(1,12),
@@ -225,8 +195,7 @@ class FakeData(){
         )
     }
 
-    fun generateAchievement(index: Int): Achievement {
-        index
+    private fun generateAchievement(index: Int): Achievement {
         return Achievement(
                 id = UUID.randomUUID(),
                 name = faker.funnyName.name(),
@@ -235,19 +204,18 @@ class FakeData(){
         )
     }
 
-    fun generateOffer(index: Int): Offer {
+    private fun generateOffer(index: Int): Offer {
         return Offer(
                 id = UUID.randomUUID(),
                 description = faker.commerce.productName(),
-                priceModel = pricemodels!![index],
-                person = people!![Random.nextInt(customerCount, peopleCount-1)],
+                priceModel = pricemodels[index],
+                person = people[Random.nextInt(customerCount, peopleCount-1)],
         )
     }
 
-    fun generatePriceModel(index: Int): PriceModel {
-        index
+    private fun generatePriceModel(index: Int): PriceModel {
         return PriceModel(
-                price = Random.nextInt(1,10000),
+                price = BigDecimal(Random.nextInt(1,10000)),
                 isSubscription = Random.nextBoolean(),
                 interval = listOf<BillingInterval?>(
                         BillingInterval.YEARLY,
@@ -257,11 +225,10 @@ class FakeData(){
         )
     }
 
-    fun generateRequest(index: Int): Request {
-        index
+    private fun generateRequest(index: Int): Request {
         return Request(
-                person = people!![Random.nextInt(0,customerCount)],
-                offer = offers!![Random.nextInt(0, offerCount)],
+                person = people[Random.nextInt(0,customerCount)],
+                offer = offers[Random.nextInt(0, offerCount)],
         )
     }
 }

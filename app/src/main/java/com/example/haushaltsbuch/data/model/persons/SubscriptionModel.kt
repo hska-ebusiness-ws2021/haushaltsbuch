@@ -1,10 +1,10 @@
 package com.example.haushaltsbuch.data.model.persons
 
-import java.util.*
+import java.math.BigDecimal
 
 class SubscriptionModel (
         val name: String,
-        val price: Int,
+        val price: BigDecimal,
         val billingInterval: BillingInterval
         ) {
 }
