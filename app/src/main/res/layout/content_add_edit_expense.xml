@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:colorBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/containerCurrencyAndAmount"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:background="?colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <EditText
+                android:id="@+id/editTextAmount"
+                android:layout_width="215dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="@dimen/spacing_xlarge"
+
+                android:fontFamily="sans-serif"
+                android:hint="@string/amount"
+                android:inputType="numberDecimal"
+                android:textColor="#0C0C0C"
+                android:textSize="24sp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--
+                android:theme="@style/ThemeOverlay.Expenses.EditText.Dark"
+            -->
+            <Button
+                android:id="@+id/button_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="center_horizontal"
+                android:text="Save"
+                android:textAlignment="center"
+
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textColor="@color/black"
+                android:textColorHighlight="#CED2EC"
+                app:backgroundTint="#EDE6A1"
+
+                app:layout_constraintBottom_toBottomOf="@+id/editTextAmount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@+id/editTextAmount"
+                app:layout_constraintTop_toTopOf="@+id/editTextAmount" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageTitle"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/editTextTitle"
+            app:layout_constraintTop_toTopOf="@id/editTextTitle"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            app:srcCompat="@drawable/ic_baseline_title_24"
+            />
+        <!--
+       app:srcCompat="@drawable/ic_title_24dp"
+       app:tint="@color/color_on_surface_emphasis_medium"
+
+
+        -->
+        <EditText
+            android:id="@+id/editTextTitle"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageTitle"
+            app:layout_constraintTop_toBottomOf="@id/containerCurrencyAndAmount"
+            android:layout_marginStart="@dimen/spacing_xlarge"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:hint="@string/title_Title"
+            android:inputType="textCapSentences"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:layout_marginLeft="@dimen/spacing_xlarge" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageTags"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/containerTags"
+            app:layout_constraintTop_toTopOf="@+id/containerTags"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            app:srcCompat="@drawable/ic_baseline_style_24"/>
+        <!--
+            app:srcCompat="@drawable/ic_local_24dp"
+            app:tint="@color/color_on_surface_emphasis_medium"
+            -->
+        <FrameLayout
+            android:id="@+id/containerTags"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageTags"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTitle"
+            android:layout_marginStart="@dimen/spacing_xlarge"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:layout_marginLeft="@dimen/spacing_xlarge"
+            android:layout_marginRight="@dimen/spacing_large">
+        <!--
+            -->
+            <!--
+            android:textColor="@color/color_on_surface_emphasis_medium"
+            -->
+
+            <Spinner
+                android:id="@+id/tags_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:paddingStart="@dimen/spacing_small"
+                android:paddingTop="@dimen/spacing_large"
+                android:paddingEnd="@dimen/spacing_small"
+                android:paddingBottom="@dimen/spacing_large"
+                android:text="@string/select_tags"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                android:textColor="@color/black" />
+
+            />
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:paddingStart="@dimen/spacing_small"
+                android:paddingEnd="@dimen/spacing_small"
+                app:chipSpacing="@dimen/spacing_normal"
+                />
+        </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageDate"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textDate"
+            app:srcCompat="@drawable/ic_baseline_date_range_24"
+            android:layout_marginLeft="16dp" />
+        <!-- app:tint="@color/color_on_surface_emphasis_medium"
+        -->
+
+        <!--
+
+            app:drawableTint="@color/color_on_surface_emphasis_medium"
+            -->
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_xlarge"
+            android:layout_marginLeft="@dimen/spacing_xlarge"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:background="#EDE6A1"
+            android:paddingStart="@dimen/spacing_small"
+            android:paddingTop="@dimen/spacing_large"
+            android:paddingEnd="@dimen/spacing_small"
+            android:paddingBottom="@dimen/spacing_large"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/black"
+            app:drawableEndCompat="@drawable/ic_arrow_drop_down_24dp"
+            app:drawableTint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/imageDate"
+            app:layout_constraintTop_toBottomOf="@id/containerTags"
+            tools:text="Sun, 27 May 19:30" />
+
+        <EditText
+            android:id="@+id/editTextNotes"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="@dimen/spacing_big"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="@dimen/spacing_big"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:gravity="top"
+            android:hint="@string/notes_Notes"
+            android:inputType="textCapSentences|textMultiLine"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textDate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+

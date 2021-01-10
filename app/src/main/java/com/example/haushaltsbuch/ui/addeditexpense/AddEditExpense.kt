@@ -1,0 +1,49 @@
+package com.example.haushaltsbuch.ui.addeditexpense
+
+import android.os.Bundle
+import android.widget.*
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import com.example.haushaltsbuch.R
+import com.google.android.material.textview.MaterialTextView
+import java.text.SimpleDateFormat
+
+class AddEditExpense : AppCompatActivity() {
+    private val model: AddExpenseViewModel by viewModels()
+
+    val parties = arrayOf(
+        "Einkaufen", "Haushalt", "Auto", "Urlaub", "Party E", "Party F", "Party G", "Party H",
+        "Party I", "Party J"
+    )
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.content_add_edit_expense)
+        setSupportActionBar(findViewById(R.id.toolbar))
+
+        val amount = findViewById<EditText>(R.id.editTextAmount)
+        val saveButton = findViewById<Button>(R.id.button_save)
+
+        saveButton.setOnClickListener {
+            Toast.makeText(this, "Save!", Toast.LENGTH_SHORT).show()
+
+        }
+
+        val spinner: Spinner = findViewById(R.id.tags_spinner)
+        val arrayTags = ArrayAdapter(this, android.R.layout.simple_spinner_item, parties)
+        spinner.adapter = arrayTags
+
+        val date = findViewById<MaterialTextView>(R.id.textDate)
+        date.setOnClickListener {
+            val newFragment = DatePickerFragment()
+            newFragment.show(supportFragmentManager, "dataPicker")
+        }
+
+        model.date.observe(this, Observer {
+            val format = SimpleDateFormat("MMM dd.yyyy")
+            date.text = format.format(it)
+        })
+
+    }
+}
