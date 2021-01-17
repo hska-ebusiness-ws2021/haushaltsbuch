@@ -15,9 +15,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.example.haushaltsbuch.ui.home.HomeActivity
 
 import com.example.haushaltsbuch.R
-import com.example.haushaltsbuch.ui.charts.PieChart
 
 class LoginActivity : AppCompatActivity() {
 
@@ -62,8 +62,8 @@ class LoginActivity : AppCompatActivity() {
             }
             setResult(Activity.RESULT_OK)
 
-            val pieChartPage = Intent(this, PieChart::class.java)
-            startActivity(pieChartPage)
+            val homeActivity = Intent(this, HomeActivity::class.java)
+            startActivity(homeActivity)
             //Complete and destroy login activity once successful
             finish()
         })
