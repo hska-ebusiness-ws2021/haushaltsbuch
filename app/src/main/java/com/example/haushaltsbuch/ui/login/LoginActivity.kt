@@ -11,10 +11,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import com.example.haushaltsbuch.ui.home.HomeActivity
 
 import com.example.haushaltsbuch.R
@@ -32,6 +29,9 @@ class LoginActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
         val loading = findViewById<ProgressBar>(R.id.loading)
+        val registerButton = findViewById<Button>(R.id.register)
+        val resetPasswordButton = findViewById<TextView>(R.id.resetPassword)
+
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
                 .get(LoginViewModel::class.java)
@@ -68,6 +68,10 @@ class LoginActivity : AppCompatActivity() {
             finish()
         })
 
+        loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
+
+        })
+
         username.afterTextChanged {
             loginViewModel.loginDataChanged(
                     username.text.toString(),
@@ -98,6 +102,13 @@ class LoginActivity : AppCompatActivity() {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
+
+            registerButton.setOnClickListener {
+                navigateToRegisterView()
+            }
+            resetPasswordButton.setOnClickListener {
+                navigateToResetPasswordView()
+            }
         }
     }
 
@@ -114,6 +125,14 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
+    }
+
+    fun navigateToRegisterView(){
+        setContentView(R.layout.activity_register)
+    }
+
+    fun navigateToResetPasswordView(){
+        setContentView(R.layout.activity_reset_password)
     }
 }
 
