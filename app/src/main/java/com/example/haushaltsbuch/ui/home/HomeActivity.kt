@@ -32,7 +32,15 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val button: Button = findViewById(R.id.buttonAusgaben)
         button.setOnClickListener{
-            startActivity(Intent(this, AddEditExpense::class.java))
+            val intent = Intent(this, AddEditExpense::class.java)
+            intent.putExtra(AddEditExpense.IS_EINNAHMEN, false)
+            startActivity(intent)
+        }
+        val buttonEinnahmen: Button = findViewById(R.id.button2)
+        buttonEinnahmen.setOnClickListener{
+            val intent = Intent(this, AddEditExpense::class.java)
+            intent.putExtra(AddEditExpense.IS_EINNAHMEN, true)
+            startActivity(intent)
         }
     }
 

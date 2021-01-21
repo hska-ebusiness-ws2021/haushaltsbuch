@@ -1,9 +1,11 @@
 package com.example.haushaltsbuch.ui.addeditexpense
 
 import android.os.Bundle
+import android.view.View.GONE
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.haushaltsbuch.R
@@ -13,6 +15,10 @@ import java.text.SimpleDateFormat
 
 class AddEditExpense : AppCompatActivity() {
     private val model: AddExpenseViewModel by viewModels()
+    companion object {
+        const val IS_EINNAHMEN = "isEinnahmen"
+    }
+
 
     val parties = arrayOf(
         "Lebensmittel", "Haushalt", "Miete", "Transport", "Ausgehen", "Kleidung", "Studium", "Urlaub"
@@ -25,6 +31,7 @@ class AddEditExpense : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         val amount = findViewById<EditText>(R.id.editTextAmount)
         val category = findViewById<Spinner>(R.id.tags_spinner)
+        val imageTag = findViewById<AppCompatImageView>(R.id.imageTags)
         val expenseAdapter = CategoryAdapter(model.expenseCategorieList)
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         recyclerView.adapter = expenseAdapter
@@ -34,7 +41,6 @@ class AddEditExpense : AppCompatActivity() {
             Toast.makeText(this, "add!", Toast.LENGTH_SHORT).show()
             expenseAdapter.notifyDataSetChanged()
         }
-
 
         val saveButton = findViewById<Button>(R.id.button_save)
 
@@ -50,6 +56,14 @@ class AddEditExpense : AppCompatActivity() {
         date.setOnClickListener {
             val newFragment = DatePickerFragment()
             newFragment.show(supportFragmentManager, "dataPicker")
+        }
+
+        val isEinnahme : Boolean = intent.getBooleanExtra(IS_EINNAHMEN, false)
+        if (isEinnahme){
+            category.visibility = GONE
+            imageTag.visibility = GONE
+            addButton.visibility = GONE
+            recyclerView.visibility = GONE
         }
 
         model.date.observe(this, Observer {
