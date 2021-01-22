@@ -16,7 +16,7 @@ import java.math.BigDecimal
 import java.util.*
 import kotlin.random.Random
 
-val fakerConfig = FakerConfig.builder().create { locale = "de" }
+val fakerConfig = FakerConfig.builder().create { }
 
 val faker = Faker(fakerConfig)
 
@@ -33,6 +33,7 @@ class FakeData (
     private val offerCount: Int = 20,
     private val requestCount: Int = 40,
     ){
+
 
     val customerCount = peopleCount - companyCount
 
@@ -58,6 +59,7 @@ class FakeData (
 
 
     private fun generatePerson(index: Int): Person  {
+
         val name = faker.name.firstName()
         val surname = faker.name.lastName()
         val domain = faker.company.name()
@@ -165,6 +167,9 @@ class FakeData (
 
     }
 
+    /**
+     * depends on expenseCategories and people
+     */
     private fun generateExpense(customerIndex: Int): (Int) -> Expense {
         return expense@{ index ->
             val amount = Random.nextInt(1, 50000)
@@ -185,7 +190,7 @@ class FakeData (
 
     private fun generateCoupon(index: Int): Coupon {
         return Coupon(
-                person = people[Random.nextInt(customerCount, peopleCount-1)],
+                person = people[Random.nextInt(customerCount-1, peopleCount-1)],
                 code = faker.commerce.promotionCode(),
                 minimumOrderValue = BigDecimal(Random.nextInt(0,1000)),
                 expirationDate = Date(
@@ -210,7 +215,7 @@ class FakeData (
                 id = UUID.randomUUID(),
                 description = faker.commerce.productName(),
                 priceModel = pricemodels[index],
-                person = people[Random.nextInt(customerCount, peopleCount-1)],
+                person = people[Random.nextInt(customerCount-1, peopleCount-1)],
         )
     }
 

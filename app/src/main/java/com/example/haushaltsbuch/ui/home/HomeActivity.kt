@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.example.haushaltsbuch.R
 import com.example.haushaltsbuch.ui.charts.PieChart
 import com.google.android.material.navigation.NavigationView
@@ -21,6 +24,12 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if(savedInstanceState == null){
+            supportFragmentManager.commit {
+                setReorderingAllowed(true)
+                add<HomeFragement>(R.id.fragment_containter)
+            }
+        }
         setContentView(R.layout.activity_home)
         setSupportActionBar(findViewById(R.id.toolbar))
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -32,7 +41,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer?.addDrawerListener(toggle)
         toggle.syncState()
 
-        /* to this to route buttons
+        /* do this to route buttons
         val button: Button = findViewById(R.id.button_id)
         button.setOnClickListener{
             // routing task
@@ -44,6 +53,10 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(item.itemId){
             // add the routing for remaining elements
             R.id.nav_statistics -> {startActivity(Intent(this, PieChart::class.java))}
+            R.id.nav_home -> {supportFragmentManager.commit { replace<ExpenseOverview>(R.id.fragment_containter)
+                setReorderingAllowed(true)
+                addToBackStack("")
+                }}
         }
         return true
     }

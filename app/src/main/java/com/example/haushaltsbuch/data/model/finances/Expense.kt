@@ -5,6 +5,8 @@ import java.math.BigDecimal
 import java.util.*
 
 data class Expense (
+        // name?
+        // date
         val id: ExpenseId,
         val amount: BigDecimal,
         val merchant: Merchant,
