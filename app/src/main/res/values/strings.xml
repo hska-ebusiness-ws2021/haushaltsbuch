@@ -30,4 +30,11 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="title_activity_add_edit_expense">add_edit_expense</string>
+    <string name="title_hint">hint</string>
+    <string name="notes_hint">hint</string>
+    <string name="amount">Amount</string>
+    <string name="title_Title">Title</string>
+    <string name="select_tags">Select Tags</string>
+    <string name="notes_Notes">Notes</string>
 </resources>

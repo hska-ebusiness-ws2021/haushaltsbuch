@@ -3,16 +3,14 @@ package com.example.haushaltsbuch.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.ActionBarDrawerToggle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.haushaltsbuch.R
+import com.example.haushaltsbuch.ui.addeditexpense.AddEditExpense
 import com.example.haushaltsbuch.ui.charts.PieChart
 import com.google.android.material.navigation.NavigationView
 
@@ -32,12 +30,18 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer?.addDrawerListener(toggle)
         toggle.syncState()
 
-        /* to this to route buttons
-        val button: Button = findViewById(R.id.button_id)
+        val button: Button = findViewById(R.id.buttonAusgaben)
         button.setOnClickListener{
-            // routing task
+            val intent = Intent(this, AddEditExpense::class.java)
+            intent.putExtra(AddEditExpense.IS_EINNAHMEN, false)
+            startActivity(intent)
         }
-        */
+        val buttonEinnahmen: Button = findViewById(R.id.button2)
+        buttonEinnahmen.setOnClickListener{
+            val intent = Intent(this, AddEditExpense::class.java)
+            intent.putExtra(AddEditExpense.IS_EINNAHMEN, true)
+            startActivity(intent)
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
