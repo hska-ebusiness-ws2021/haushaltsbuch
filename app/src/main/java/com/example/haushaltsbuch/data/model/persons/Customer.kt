@@ -1,20 +1,38 @@
 package com.example.haushaltsbuch.data.model.persons
 
 import com.example.haushaltsbuch.data.model.gamification.Achievement
-import java.util.*
+import com.example.haushaltsbuch.data.model.gamification.Achievements
+import org.jetbrains.exposed.sql.Column
+import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.jodatime.date
+import org.joda.time.DateTime
+
+/*
+* Customers Table with database scheme
+*
+* */
+
+object Customers : Table() {
+    val id: Column<Int> = reference("id", Persons.id)
+    val email: Column<String> = reference("email", Persons.email)
+    val firstname: Column<String> = reference("firstname", Persons.firstname)
+    val lastname: Column<String> = reference("lastname", Persons.lastname)
+    val user: Column<String> = reference("user", Users.username)
+
+    val backupInfo: Column<String> = varchar("backupInfo", 50)
+    val dateOfBirth: Column<DateTime> = date("date")
+    val subscription: Column<Int> = reference("subscription", SubscriptionModels.id)
+    val achievements: Column<Int> = reference("achievement", Achievements.id)
+}
 
 class Customer(
-        id: PersonId,
-        email: String,
-        firstname: String,
-        lastname: String,
-        address: Address,
-        user: User,
-        val backupInfo: String,
-        val dateOfBirth: Date,
-        val subscription: SubscriptionModel,
-        val friend: Friend,
-        val achievements: MutableList<Achievement>
-        ) : Person(
-        id, email, firstname, lastname, address, user
-                ){}
+    id: PersonId,
+    email: String,
+    firstname: String,
+    lastname: String,
+    user: User,
+    val backupInfo: String,
+    val dateOfBirth: DateTime,
+    val subscription: SubscriptionModel,
+    val achievements: MutableList<Achievement>
+) : Person(id, email, firstname, lastname, user) {}
