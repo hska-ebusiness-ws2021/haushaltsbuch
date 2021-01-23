@@ -1,7 +1,6 @@
 package com.example.haushaltsbuch.data.model.finances
 
-import com.example.haushaltsbuch.data.model.persons.Person
-import com.example.haushaltsbuch.data.model.persons.Persons
+import com.example.haushaltsbuch.data.model.persons.*
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Table
 import java.math.BigDecimal

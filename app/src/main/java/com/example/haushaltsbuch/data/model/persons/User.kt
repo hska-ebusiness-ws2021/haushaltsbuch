@@ -18,6 +18,5 @@ data class User(
     var username: String,
     var password: String
 ) {
-    override fun toString(): String = "User($username, $password)"
     fun toUser() = User(username, password)
 }

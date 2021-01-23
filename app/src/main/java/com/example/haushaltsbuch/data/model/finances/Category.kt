@@ -10,7 +10,7 @@ import org.jetbrains.exposed.sql.Table
 
 object Categories : Table() {
     val name: Column<String> = varchar("name", 30)
-    override val primaryKey = PrimaryKey(name, name = "PK_Name_ID")
+    //override val primaryKey = PrimaryKey(name, name = "PK_Name_ID")
 }
 
 class Category(val name: String) {}

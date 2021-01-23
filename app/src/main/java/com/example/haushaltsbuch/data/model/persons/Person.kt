@@ -11,9 +11,10 @@ import org.jetbrains.exposed.sql.Table
 
 object Persons : Table() {
     val id: Column<Int> = integer("id").autoIncrement()
-    val email: Column<String> = varchar("email", 40)
+    val email: Column<String> = varchar("email", 40).references(Users.username)
     val firstname: Column<String> = varchar("firstname", 20)
     val lastname: Column<String> = varchar("lastname", 20)
+    val password: Column<String> = Customers.reference("user", Users.password)
     override val primaryKey = PrimaryKey(id, name = "PK_Person_ID")
 }
 
