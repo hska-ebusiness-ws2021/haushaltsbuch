@@ -127,11 +127,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun navigateToRegisterView(){
-        setContentView(R.layout.activity_register)
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 
     fun navigateToResetPasswordView(){
-        setContentView(R.layout.activity_reset_password)
+        val intent = Intent(this, ResetPasswordActivity::class.java)
+        startActivity(intent)
     }
 }
 

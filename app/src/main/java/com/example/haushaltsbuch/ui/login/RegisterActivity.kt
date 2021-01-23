@@ -1,5 +1,6 @@
 package com.example.haushaltsbuch.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -9,9 +10,10 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        setContentView(R.layout.activity_register)
         super.onCreate(savedInstanceState)
 
-        val backButton = findViewById<Button>(R.id.backButton)
+        val backButton = findViewById<Button>(R.id.registerBackButton)
         val registerButton = findViewById<Button>(R.id.registerButton)
 
         backButton.setOnClickListener{
@@ -25,10 +27,12 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun navigateToLogin(){
-        setContentView(R.layout.activity_login)
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 
     fun sendRegister(){
-        setContentView(R.layout.activity_login)
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 }
