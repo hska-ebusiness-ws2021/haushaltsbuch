@@ -58,12 +58,15 @@ class AddEditExpense : AppCompatActivity() {
             newFragment.show(supportFragmentManager, "dataPicker")
         }
 
+        val title= findViewById<TextView>(R.id.titleExpenses)
+
         val isEinnahme : Boolean = intent.getBooleanExtra(IS_EINNAHMEN, false)
         if (isEinnahme){
             category.visibility = GONE
             imageTag.visibility = GONE
             addButton.visibility = GONE
             recyclerView.visibility = GONE
+            title.text = "Einnahmen"
         }
 
         model.date.observe(this, Observer {
