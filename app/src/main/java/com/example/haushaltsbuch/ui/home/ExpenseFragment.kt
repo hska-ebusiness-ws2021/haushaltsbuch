@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.haushaltsbuch.R
 import com.example.haushaltsbuch.data.model.FakeData
-import com.example.haushaltsbuch.ui.home.dummy.DummyContent
 
 /**
  * A fragment representing a list of Items.

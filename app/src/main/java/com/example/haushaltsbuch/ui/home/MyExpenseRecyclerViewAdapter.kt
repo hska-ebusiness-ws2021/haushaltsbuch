@@ -8,11 +8,9 @@ import android.widget.TextView
 import com.example.haushaltsbuch.R
 import com.example.haushaltsbuch.data.model.finances.Expense
 
-import com.example.haushaltsbuch.ui.home.dummy.DummyContent.DummyItem
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].
- * TODO: Replace the implementation with code for your data type.
  */
 class MyExpenseRecyclerViewAdapter(
     private val values: List<Expense>

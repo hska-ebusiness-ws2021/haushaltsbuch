@@ -39,18 +39,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer?.addDrawerListener(toggle)
         toggle.syncState()
 
-        val button: Button = findViewById(R.id.buttonAusgaben)
-        button.setOnClickListener{
-            val intent = Intent(this, AddEditExpense::class.java)
-            intent.putExtra(AddEditExpense.IS_EINNAHMEN, false)
-            startActivity(intent)
-        }
-        val buttonEinnahmen: Button = findViewById(R.id.button2)
-        buttonEinnahmen.setOnClickListener{
-            val intent = Intent(this, AddEditExpense::class.java)
-            intent.putExtra(AddEditExpense.IS_EINNAHMEN, true)
-            startActivity(intent)
-        }
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
