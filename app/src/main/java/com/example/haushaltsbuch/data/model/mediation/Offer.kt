@@ -12,18 +12,18 @@ import java.util.UUID
 * */
 
 object Offers : Table() {
-    val id: Column<Int> = integer("id").autoIncrement()
-    val description: Column<String> = varchar("description", 255)
-    val priceModel: Column<String> = varchar("pricemodel", 20)
-    val personId: Column<Int> = reference("id", Persons.id)
-    override val primaryKey = PrimaryKey(id, name = "PK_Offer_ID")
+    var id: Column<UUID> = uuid("id")
+    var description: Column<String> = varchar("description", 255)
+    var priceModel: Column<String> = varchar("pricemodel", 20)
+    var personId: Column<UUID> = reference("id", Persons.id)
+    override var primaryKey = PrimaryKey(id, name = "PK_Offer_ID")
 }
 
 class Offer(
-    val id: OfferId,
-    val description: String,
-    val priceModel: PriceModel,
-    val person: Person
+    var id: OfferId,
+    var description: String,
+    var priceModel: PriceModel,
+    var person: Person
 ) {}
 
 typealias OfferId = UUID

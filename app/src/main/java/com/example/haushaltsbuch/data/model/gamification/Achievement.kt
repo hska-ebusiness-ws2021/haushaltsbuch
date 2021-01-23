@@ -10,18 +10,18 @@ import java.util.UUID
 * */
 
 object Achievements : Table() {
-        val id: Column<Int> = integer("id").autoIncrement()
-        val name: Column<String> = varchar("name", 30)
-        val description: Column<String> = varchar("description", 255)
-        val isAchieved: Column<Boolean> = bool("false")
-        override val primaryKey = PrimaryKey(id, name = "PK_Achieve_ID")
+    var id: Column<UUID> = uuid("id")
+    var name: Column<String> = varchar("name", 30)
+    var description: Column<String> = varchar("description", 255)
+    var isAchieved: Column<Boolean> = bool("false")
+    override var primaryKey = PrimaryKey(id, name = "PK_Achieve_ID")
 }
 
 class Achievement(
-        val id: AchievementId,
-        val name: String,
-        val description: String,
-        val isAchieved: Boolean
+    var id: AchievementId,
+    var name: String,
+    var description: String,
+    var isAchieved: Boolean
 ) {}
 
 typealias AchievementId = UUID

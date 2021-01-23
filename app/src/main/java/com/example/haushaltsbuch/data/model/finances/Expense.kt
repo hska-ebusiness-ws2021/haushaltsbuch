@@ -14,13 +14,13 @@ import org.joda.time.DateTime
 * */
 
 object Expenses : Table() {
-    val id: Column<Int> = integer("id").autoIncrement()
-    val amount: Column<BigDecimal> = decimal("amount", 8, 2)
-    val points: Column<Int> = integer("points")
-    val category: Column<String> = reference("category", Categories.name)
-    val person: Column<Int> = reference("person_id", Persons.id)
-    val date: Column<DateTime> = date("date")
-    override val primaryKey = PrimaryKey(id, name = "PK_Expense_ID")
+    var id: Column<UUID> = uuid("id")
+    var amount: Column<BigDecimal> = decimal("amount", 8, 2)
+    var points: Column<Int> = integer("points")
+    var category: Column<String> = reference("category", Categories.name)
+    var person: Column<UUID> = reference("person", Persons.id)
+    var date: Column<DateTime> = date("date")
+    override var primaryKey = PrimaryKey(id, name = "PK_Expense_ID")
 }
 
 data class Expense(

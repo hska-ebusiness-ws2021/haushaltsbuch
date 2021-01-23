@@ -1,11 +1,8 @@
 package com.example.haushaltsbuch.data.model
 
-import com.example.haushaltsbuch.data.model.finances.Category
-import com.example.haushaltsbuch.data.model.finances.Expense
-import com.example.haushaltsbuch.data.model.gamification.Achievement
-import com.example.haushaltsbuch.data.model.mediation.Offer
-import com.example.haushaltsbuch.data.model.mediation.PriceModel
-import com.example.haushaltsbuch.data.model.mediation.Request
+import com.example.haushaltsbuch.data.model.finances.*
+import com.example.haushaltsbuch.data.model.gamification.*
+import com.example.haushaltsbuch.data.model.mediation.*
 import com.example.haushaltsbuch.data.model.persons.*
 import org.joda.time.DateTime
 import java.math.BigDecimal
@@ -14,33 +11,33 @@ import kotlin.random.Random
 
 
 class DevData(
-    private val categoryCount: Int = 10,
-    private val achievementCount: Int = 20,
-    private val offerCount: Int = 20,
-    private val requestCount: Int = 40,
+    private var categoryCount: Int = 10,
+    private var achievementCount: Int = 20,
+    private var offerCount: Int = 20,
+    private var requestCount: Int = 40,
 ) {
 
-    val peopleCount = 4
-    val customerCount = 3
+    var peopleCount = 4
+    var customerCount = 3
 
     // Data
-    val users = List(peopleCount, ::generateUser)
-    val people = List<Person>(peopleCount, ::generatePerson)
-    val subscriptions = generateSubscriptionModels()
-    val customers = List<Customer>(customerCount, ::generateCustomer)
-    val expenseCategories = List<Category>(categoryCount, ::generateCategory)
-    val expenses = List<List<Expense>>(customerCount, ::generateExpenseList)
-    val achievements = List<Achievement>(achievementCount, ::generateAchievement)
-    val pricemodels = List<PriceModel>(offerCount, ::generatePriceModel)
-    val offers = List<Offer>(offerCount, ::generateOffer)
-    val requests = List<Request>(requestCount, ::generateRequest)
+    var users = List(peopleCount, ::generateUser)
+    var people = List<Person>(peopleCount, ::generatePerson)
+    var subscriptions = generateSubscriptionModels()
+    var customers = List<Customer>(customerCount, ::generateCustomer)
+    var expenseCategories = List<Category>(categoryCount, ::generateCategory)
+    var expenses = List<List<Expense>>(customerCount, ::generateExpenseList)
+    var achievements = List<Achievement>(achievementCount, ::generateAchievement)
+    var pricemodels = List<PriceModel>(offerCount, ::generatePriceModel)
+    var offers = List<Offer>(offerCount, ::generateOffer)
+    var requests = List<Request>(requestCount, ::generateRequest)
 
 
     private fun generatePerson(index: Int): Person {
 
-        val name = "Bernt"
-        val surname = "Sieberts"
-        val domain = "acme"
+        var name = "Bernt"
+        var surname = "Sieberts"
+        var domain = "acme"
         return Person(
             id = UUID.randomUUID(),
             firstname = name,
@@ -83,13 +80,13 @@ class DevData(
                 id = UUID.randomUUID(),
                 name = "STANDARD",
                 price = BigDecimal(0),
-                billingInterval = BillingInterval.YEARLY,
+                billingIntervar = BillingIntervar.YEARLY,
             ),
             SubscriptionModel(
                 id = UUID.randomUUID(),
                 name = "PREMIUM",
                 price = BigDecimal(500),
-                billingInterval = BillingInterval.YEARLY
+                billingIntervar = BillingIntervar.YEARLY
             ),
         )
     }
@@ -103,7 +100,7 @@ class DevData(
      */
     private fun generateExpense(customerIndex: Int): (Int) -> Expense {
         return expense@{ index ->
-            val amount = Random.nextInt(1, 50000)
+            var amount = Random.nextInt(1, 50000)
             return@expense Expense(
                 id = UUID.randomUUID(),
                 amount = BigDecimal(amount),
@@ -148,9 +145,9 @@ class DevData(
             id = UUID.randomUUID(),
             price = BigDecimal(Random.nextInt(1, 10000)),
             isSubscription = Random.nextBoolean(),
-            interval = listOf<BillingInterval>(
-                BillingInterval.YEARLY,
-                BillingInterval.MONTHLY,
+            intervar = listOf<BillingIntervar>(
+                BillingIntervar.YEARLY,
+                BillingIntervar.MONTHLY,
             )[Random.nextInt(0, 2)]
         )
     }

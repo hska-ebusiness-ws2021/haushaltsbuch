@@ -11,23 +11,23 @@ import java.util.UUID
 * */
 
 object SubscriptionModels : Table() {
-    val id: Column<Int> = integer("id").autoIncrement()
-    val name: Column<String> = varchar("name", 20)
-    val price: Column<BigDecimal> = decimal("price", 8, 2)
-    val billingInterval: Column<BillingInterval> = customEnumeration(
-        "interval",
+    var id: Column<Int> = integer("id").autoIncrement()
+    var name: Column<String> = varchar("name", 20)
+    var price: Column<BigDecimal> = decimal("price", 8, 2)
+    var billingIntervar: Column<BillingIntervar> = customEnumeration(
+        "intervar",
         "enum",
-        { value -> BillingInterval.valueOf(value as String) },
+        { value -> BillingIntervar.valueOf(value as String) },
         { it.name }
     )
-    override val primaryKey = PrimaryKey(id, name = "PK_Sub_ID")
+    override var primaryKey = PrimaryKey(id, name = "PK_Sub_ID")
 }
 
 open class SubscriptionModel(
-    val id: SubID,
-    val name: String,
-    val price: BigDecimal,
-    val billingInterval: BillingInterval
+    var id: SubID,
+    var name: String,
+    var price: BigDecimal,
+    var billingIntervar: BillingIntervar
 ) {}
 
 typealias SubID = UUID

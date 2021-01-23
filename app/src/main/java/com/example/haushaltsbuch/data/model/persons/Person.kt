@@ -10,20 +10,22 @@ import org.jetbrains.exposed.sql.Table
 * */
 
 object Persons : Table() {
-    val id: Column<Int> = integer("id").autoIncrement()
-    val email: Column<String> = varchar("email", 40).references(Users.username)
-    val firstname: Column<String> = varchar("firstname", 20)
-    val lastname: Column<String> = varchar("lastname", 20)
-    val password: Column<String> = Customers.reference("user", Users.password)
-    override val primaryKey = PrimaryKey(id, name = "PK_Person_ID")
+    var id: Column<UUID> = uuid("id")
+    var email: Column<String> = varchar("email", 40)
+    var firstname: Column<String> = varchar("firstname", 20)
+    var lastname: Column<String> = varchar("lastname", 20)
+    var username: Column<String> = varchar("username", 20).references(Users.username)
+    var password: Column<String> = Customers.reference("user", Users.password)
+    override var primaryKey = PrimaryKey(id, name = "PK_Person_ID")
 }
 
-open class Person(
-    val id: PersonId,
-    val email: String,
-    val firstname: String,
-    val lastname: String,
-    val user: User
-) {}
+data class Person(
+    var id: PersonId,
+    var email: String,
+    var firstname: String,
+    var lastname: String,
+    var username: String,
+    var password: String
+)
 
 typealias PersonId = UUID

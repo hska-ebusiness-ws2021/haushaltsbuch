@@ -11,7 +11,7 @@ import org.jetbrains.exposed.sql.Column
 object Users : Table() {
     var username: Column<String> = varchar("username", 20)
     var password: Column<String> = varchar("password", 20)
-    override val primaryKey = PrimaryKey(username, name = "PK_Username")
+    override var primaryKey = PrimaryKey(username, name = "PK_Username")
 }
 
 data class User(

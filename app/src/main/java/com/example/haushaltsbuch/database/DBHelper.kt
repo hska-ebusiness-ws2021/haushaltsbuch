@@ -4,6 +4,7 @@ import com.example.haushaltsbuch.data.model.finances.*
 import com.example.haushaltsbuch.data.model.persons.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import java.util.*
 import kotlin.collections.ArrayList
 
 class DBHelper {
@@ -72,9 +73,11 @@ class DBHelper {
 
     fun addPerson(person: Person) = transaction {
         Persons.insert {
+            it[this.id] = UUID.randomUUID()
             it[this.firstname] = person.firstname
             it[this.lastname] = person.lastname
             it[this.email] = person.email
+            it[this.username] = person.username
             it[this.password] = person.email
         }
     }
@@ -83,7 +86,7 @@ class DBHelper {
     * function to delete person
     * */
 
-    fun deletePerson(id: Int) = transaction {
+    fun deletePerson(id: UUID) = transaction {
         Persons.deleteWhere { Persons.id.eq(id) }
     }
 
@@ -138,7 +141,7 @@ class DBHelper {
     * function to update expense
     * */
 
-    fun updateExpense(id: Int, expense: Expense) = transaction {
+    fun updateExpense(id: UUID, expense: Expense) = transaction {
         Expenses.update({ Expenses.id.eq(id) }) {
             it[this.amount] = expense.amount
             it[this.date] = expense.date
@@ -149,7 +152,7 @@ class DBHelper {
     * function to delete expense
     * */
 
-    fun deleteExpense(id: Int) = transaction {
+    fun deleteExpense(id: UUID) = transaction {
         Expenses.deleteWhere { Expenses.id.eq(id) }
     }
 }
