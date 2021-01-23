@@ -17,20 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_containter"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <include layout="@layout/content_home" />
-            </FrameLayout>
-        </FrameLayout>
+        </androidx.fragment.app.FragmentContainerView>
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/sidenav"

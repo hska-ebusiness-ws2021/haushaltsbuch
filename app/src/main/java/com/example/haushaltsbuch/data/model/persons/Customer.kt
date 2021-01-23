@@ -8,13 +8,11 @@ class Customer(
         email: String,
         firstname: String,
         lastname: String,
-        address: Address,
         user: User,
         val backupInfo: String,
         val dateOfBirth: Date,
         val subscription: SubscriptionModel,
-        val friend: Friend,
         val achievements: MutableList<Achievement>
         ) : Person(
-        id, email, firstname, lastname, address, user
+        id, email, firstname, lastname, user
                 ){}
