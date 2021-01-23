@@ -7,33 +7,20 @@ import com.example.haushaltsbuch.data.model.mediation.Offer
 import com.example.haushaltsbuch.data.model.mediation.PriceModel
 import com.example.haushaltsbuch.data.model.mediation.Request
 import com.example.haushaltsbuch.data.model.persons.*
-import io.github.serpro69.kfaker.Faker
-import io.github.serpro69.kfaker.FakerConfig
-import io.github.serpro69.kfaker.create
 import java.math.BigDecimal
 import java.util.*
 import kotlin.random.Random
 
-val fakerConfig = FakerConfig.builder().create { }
-
-val faker = Faker(fakerConfig)
 
 class FakeData (
-    private val addressCount: Int = 50,
-    private val peopleCount: Int = 50,
-    private val postcodeCount: Int = 5,
-    private val streetcount: Int = 10,
-    private val locationCount: Int = 5,
-    private val companyCount: Int = 10,
     private val categoryCount: Int = 10,
-    private val couponCount: Int = 20,
     private val achievementCount: Int = 20,
     private val offerCount: Int = 20,
     private val requestCount: Int = 40,
     ){
 
-
-    val customerCount = peopleCount - companyCount
+    val peopleCount = 4
+    val customerCount = 3
 
 // Data
     val users = List(peopleCount, ::generateUser)
@@ -50,9 +37,9 @@ class FakeData (
 
     private fun generatePerson(index: Int): Person  {
 
-        val name = faker.name.firstName()
-        val surname = faker.name.lastName()
-        val domain = faker.company.name()
+        val name = "Bernt"
+        val surname = "Sieberts"
+        val domain = "acme"
         return Person(
             id = UUID.randomUUID(),
             firstname = name,
@@ -65,7 +52,7 @@ class FakeData (
 
     private fun generateUser(index: Int): User {
         return User(
-                username = faker.funnyName.name(),
+                username = "Bernle",
                 password = "password",
         )
     }
@@ -77,7 +64,7 @@ class FakeData (
                 firstname =  people[index].firstname,
                 lastname = people[index].lastname,
                 user = people[index].user,
-                backupInfo = "http://${faker.internet.domain()}.de",
+                backupInfo = "http://acme.de",
                 dateOfBirth = Date(
                         Random.nextInt(1950,2015),
                         Random.nextInt(1,12),
@@ -125,14 +112,14 @@ class FakeData (
     }
 
     private fun generateCategory(index: Int): Category {
-        return Category(name = faker.company.industry())
+        return Category(name = "Haushalt")
     }
 
     private fun generateAchievement(index: Int): Achievement {
         return Achievement(
             id = UUID.randomUUID(),
-            name = faker.funnyName.name(),
-            description = faker.greekPhilosophers.quotes(),
+            name = "Erstelle eine Ausgabe",
+            description = "Erstelle Ausgaben",
             isAchieved = false,
         )
     }
@@ -140,7 +127,7 @@ class FakeData (
     private fun generateOffer(index: Int): Offer {
         return Offer(
                 id = UUID.randomUUID(),
-                description = faker.commerce.productName(),
+                description = "Tisch",
                 priceModel = pricemodels[index],
                 person = people[Random.nextInt(customerCount-1, peopleCount-1)],
         )

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.haushaltsbuch.R
 import com.example.haushaltsbuch.data.model.finances.Expense
+import kotlin.random.Random
 
 
 /**
@@ -16,6 +17,8 @@ class MyExpenseRecyclerViewAdapter(
     private val values: List<Expense>
 ) : RecyclerView.Adapter<MyExpenseRecyclerViewAdapter.ViewHolder>() {
 
+    val names = listOf<String>("Essen", "Technik", "Games")
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_item, parent, false)
@@ -24,7 +27,7 @@ class MyExpenseRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.id.toString()
+        holder.idView.text = names[Random.nextInt(0,2)]
         holder.contentView.text = "${item.amount} EUR"
     }
 

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.haushaltsbuch.R
 import com.example.haushaltsbuch.data.model.FakeData
+import com.example.haushaltsbuch.data.model.finances.Expense
 
 /**
  * A fragment representing a list of Items.
@@ -17,7 +18,7 @@ import com.example.haushaltsbuch.data.model.FakeData
 class ExpenseFragment : Fragment() {
 
     private var columnCount = 1
-    private val fakeData = FakeData(addressCount = 2, peopleCount = 4, 2,2,2 ,1,2,2,1,2,2)
+    private val fakeData = FakeData(2,1,1,2)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +49,8 @@ class ExpenseFragment : Fragment() {
 
     companion object {
 
-        // TODO: Customize parameter argument names
         const val ARG_COLUMN_COUNT = "column-count"
 
-        // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
             ExpenseFragment().apply {

@@ -29,7 +29,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun sendRegister(){
-        // TODO: Implement
         setContentView(R.layout.activity_login)
     }
 }

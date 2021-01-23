@@ -25,7 +25,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if(savedInstanceState == null){
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                add<HomeFragement>(R.id.fragment_containter)
+                add<ExpenseOverview>(R.id.fragment_containter)
             }
         }
         setContentView(R.layout.activity_home)
