@@ -12,6 +12,7 @@ class RegisterActivity : AppCompatActivity() {
 
         print("onCreate")
 
+        setContentView(R.layout.activity_register)
         super.onCreate(savedInstanceState)
 
         val backButton = findViewById<Button>(R.id.registerBackButton)
