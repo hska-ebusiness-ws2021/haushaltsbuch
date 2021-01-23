@@ -10,8 +10,6 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        print("onCreate")
-
         setContentView(R.layout.activity_register)
         super.onCreate(savedInstanceState)
 
@@ -19,7 +17,6 @@ class RegisterActivity : AppCompatActivity() {
         val registerButton = findViewById<Button>(R.id.registerButton)
 
         backButton.setOnClickListener{
-        print("setListener")
             navigateToLogin()
         }
 
@@ -30,13 +27,12 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun navigateToLogin(){
-        print("navigateToLogin")
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 
     fun sendRegister(){
-        print("sendRegister")
-        setContentView(R.layout.activity_login)
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 }

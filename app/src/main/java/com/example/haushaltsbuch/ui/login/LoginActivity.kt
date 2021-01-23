@@ -132,7 +132,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun navigateToResetPasswordView(){
-        setContentView(R.layout.activity_reset_password)
+        val intent = Intent(this, ResetPasswordActivity::class.java)
+        startActivity(intent)
     }
 }
 
