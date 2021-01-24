@@ -25,6 +25,7 @@ class RegisterActivity : AppCompatActivity() {
         val registerButton = binding.registerButton
 
         backButton.setOnClickListener {
+
             navigateToLogin()
         }
 
@@ -41,6 +42,7 @@ class RegisterActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
+
 
     fun sendRegister() {
         val intent = Intent(this, LoginActivity::class.java)

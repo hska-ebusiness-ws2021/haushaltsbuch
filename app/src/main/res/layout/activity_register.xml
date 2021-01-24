@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.haushaltsbuch.ui.login.RegisterActivity">
-
     <data>
         <variable
             android:firstname=""
@@ -16,7 +15,6 @@
             android:type="com.example.haushaltsbuch.data.model.persons.Person"
             tools:ignore="Deprecated" />
     </data>
-
     <Button
         android:id="@+id/registerBackButton"
         android:layout_width="wrap_content"

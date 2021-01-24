@@ -18,6 +18,7 @@ object Users : Table() {
 data class User(
     var username: String,
     var password: String
+
 ) {
     companion object User {
         var user = mutableListOf<Users>()
