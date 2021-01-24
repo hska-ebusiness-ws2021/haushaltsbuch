@@ -39,14 +39,25 @@ class DBHelper {
     }
 
     /*
+    * function to get user password from database
+    * */
+
+    fun getUserPassword(pwd: String) = transaction {
+        Users.select { Users.password.eq(pwd) }
+    }
+
+    /*
     * function to add user to database
     * */
 
-    fun addUser(user: User) = transaction {
-        Users.insert {
-            it[this.username] = user.username
-            it[this.password] = user.password
+    fun addUser(user: User): User {
+        transaction {
+            Users.insert {
+                it[this.username] = user.username
+                it[this.password] = user.password
+            }
         }
+        return user
     }
 
     /*
@@ -77,8 +88,8 @@ class DBHelper {
             it[this.firstname] = person.firstname
             it[this.lastname] = person.lastname
             it[this.email] = person.email
-            it[this.username] = person.username
-            it[this.password] = person.email
+            it[this.username] = person.user.username
+            it[this.password] = person.user.password
         }
     }
 

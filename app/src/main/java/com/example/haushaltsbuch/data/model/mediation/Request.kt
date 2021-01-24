@@ -16,7 +16,7 @@ object Requests : Table() {
     var offer: Column<UUID> = reference("offer_id", Offers.id)
 }
 
-class Request(
+data class Request(
     var person: Person,
     var offer: Offer
 ) {}

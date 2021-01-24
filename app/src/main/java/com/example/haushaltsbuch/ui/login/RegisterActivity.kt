@@ -21,8 +21,8 @@ class RegisterActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val backButton = findViewById<Button>(R.id.registerBackButton)
-        val registerButton = findViewById<Button>(R.id.registerButton)
+        val backButton = binding.registerBackButton
+        val registerButton = binding.registerButton
 
         backButton.setOnClickListener {
             navigateToLogin()
@@ -30,6 +30,10 @@ class RegisterActivity : AppCompatActivity() {
 
         registerButton.setOnClickListener {
             sendRegister()
+        }
+
+        binding.registerButton.setOnClickListener {
+            userRegister(it)
         }
     }
 
@@ -43,30 +47,40 @@ class RegisterActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun register(view: View) {
-        val id = UUID.randomUUID()
-        val firstname = binding.editTextTextPersonName.toString()
-        val lastname = binding.editTextTextPersonName2.toString()
-        val email = binding.editTextTextEmailAddress.toString()
-        val username = binding.editTextTextPersonName3.toString()
-        val password = binding.editTextTextPassword2.toString()
-        val passwordConfirm = binding.editTextNumberPassword.toString()
-        val databaseHandler: DBHelper = DBHelper()
+    fun userRegister(view: View) {
+        binding.apply {
+            val id = UUID.randomUUID()
+            val firstname = binding.editTextTextPersonName.toString()
+            val lastname = binding.editTextTextPersonName2.toString()
+            val email = binding.editTextTextEmailAddress.toString()
+            val username = binding.editTextTextPersonName3.toString()
+            val password = binding.editTextTextPassword2.toString()
+            val passwordConfirm = binding.editTextNumberPassword.toString()
+            val dbHelper: DBHelper = DBHelper()
 
-        if (firstname != "" && lastname != "" && email != "" && username != "" && password != "" && passwordConfirm != "" && password.equals(
-                passwordConfirm
-            )
-        ) {
-            val status = databaseHandler.addPerson(
-                Person(id, firstname, lastname, email, username, password)
-            )
-            //after onClick
-            binding.editTextTextPersonName.clearComposingText()
-            binding.editTextTextPersonName2.clearComposingText()
-            binding.editTextTextEmailAddress.clearComposingText()
-            binding.editTextTextPersonName3.clearComposingText()
-            binding.editTextTextPassword2.clearComposingText()
-            binding.editTextNumberPassword.clearComposingText()
+            if (firstname != "" && lastname != "" && email != "" && username != "" && password != "" && passwordConfirm != "" && password.equals(
+                    passwordConfirm
+                )
+            ) {
+
+                val addPerson = dbHelper.addPerson(
+                    Person(
+                        id,
+                        firstname,
+                        lastname,
+                        email,
+                        dbHelper.addUser(User(username, password))
+                    )
+                )
+
+                //after onClick
+                binding.editTextTextPersonName.setText("")
+                binding.editTextTextPersonName2.setText("")
+                binding.editTextTextEmailAddress.setText("")
+                binding.editTextTextPersonName3.setText("")
+                binding.editTextTextPassword2.setText("")
+                binding.editTextNumberPassword.setText("")
+            }
         }
     }
 }

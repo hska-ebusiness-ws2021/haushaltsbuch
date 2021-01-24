@@ -11,7 +11,7 @@ import java.util.UUID
 * */
 
 object SubscriptionModels : Table() {
-    var id: Column<Int> = integer("id").autoIncrement()
+    var id: Column<UUID> = uuid("id")
     var name: Column<String> = varchar("name", 20)
     var price: Column<BigDecimal> = decimal("price", 8, 2)
     var billingIntervar: Column<BillingIntervar> = customEnumeration(
@@ -23,7 +23,7 @@ object SubscriptionModels : Table() {
     override var primaryKey = PrimaryKey(id, name = "PK_Sub_ID")
 }
 
-open class SubscriptionModel(
+data class SubscriptionModel(
     var id: SubID,
     var name: String,
     var price: BigDecimal,

@@ -24,7 +24,7 @@ object PriceModels : Table() {
     override var primaryKey = PrimaryKey(id, name = "PK_PriceModel_ID")
 }
 
-class PriceModel(
+data class PriceModel(
     var id: PriceModelId,
     var price: BigDecimal,
     var isSubscription: Boolean,

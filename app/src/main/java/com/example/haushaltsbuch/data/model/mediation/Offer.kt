@@ -19,7 +19,7 @@ object Offers : Table() {
     override var primaryKey = PrimaryKey(id, name = "PK_Offer_ID")
 }
 
-class Offer(
+data class Offer(
     var id: OfferId,
     var description: String,
     var priceModel: PriceModel,

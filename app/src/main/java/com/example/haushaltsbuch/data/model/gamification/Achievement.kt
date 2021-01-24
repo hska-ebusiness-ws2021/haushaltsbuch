@@ -17,7 +17,7 @@ object Achievements : Table() {
     override var primaryKey = PrimaryKey(id, name = "PK_Achieve_ID")
 }
 
-class Achievement(
+data class Achievement(
     var id: AchievementId,
     var name: String,
     var description: String,

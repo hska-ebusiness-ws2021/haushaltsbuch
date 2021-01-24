@@ -13,4 +13,4 @@ object Categories : Table() {
     //override var primaryKey = PrimaryKey(name, name = "PK_Name_ID")
 }
 
-class Category(var name: String) {}
+data class Category(var name: String) {}
