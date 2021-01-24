@@ -7,6 +7,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.haushaltsbuch.R
 import com.example.haushaltsbuch.ui.addeditexpense.AddEditExpense
+import com.example.haushaltsbuch.ui.goals.AddGoals
 
 class HomeFragement: Fragment(R.layout.content_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -22,6 +23,12 @@ class HomeFragement: Fragment(R.layout.content_home) {
         buttonEinnahmen.setOnClickListener{
             val intent = Intent(activity, AddEditExpense::class.java)
             intent.putExtra(AddEditExpense.IS_EINNAHMEN, true)
+            startActivity(intent)
+        }
+
+        val buttonGoals: Button = view.findViewById(R.id.button4)
+        buttonGoals.setOnClickListener {
+            val intent = Intent(activity, AddGoals::class.java)
             startActivity(intent)
         }
     }

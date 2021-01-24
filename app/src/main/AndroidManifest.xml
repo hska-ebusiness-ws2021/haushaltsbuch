@@ -23,6 +23,11 @@
             android:theme="@style/Theme.Haushaltsbuch.NoActionBar">
         </activity>
         <activity
+            android:name=".ui.goals.AddGoals"
+            android:label="add_Goals"
+            android:theme="@style/Theme.Haushaltsbuch.NoActionBar" />
+
+        <activity
             android:name=".ui.charts.PieChart"
             android:label="@string/title_activity_pie_chart"
             android:theme="@style/Theme.Haushaltsbuch.NoActionBar" />
