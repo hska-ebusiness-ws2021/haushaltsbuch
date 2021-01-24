@@ -3,8 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    tools:context="com.example.haushaltsbuch.ui.login.RegisterActivity">
+    <data>
+        <variable
+            android:firstname=""
+            android:lastname=""
+            android:email=""
+            android:username=""
+            android:password=""
+            android:type="com.example.haushaltsbuch.data.model.persons.Person"
+            tools:ignore="Deprecated" />
+    </data>
     <Button
         android:id="@+id/registerBackButton"
         android:layout_width="wrap_content"
