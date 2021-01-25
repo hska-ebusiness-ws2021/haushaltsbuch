@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.haushaltsbuch.R
+import com.example.haushaltsbuch.ui.DatePickerFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
 import java.text.SimpleDateFormat
@@ -54,9 +55,11 @@ class AddEditExpense : AppCompatActivity() {
 
         val date = findViewById<MaterialTextView>(R.id.textDate)
         date.setOnClickListener {
-            val newFragment = DatePickerFragment()
+            val newFragment = DatePickerFragment(model.date)
             newFragment.show(supportFragmentManager, "dataPicker")
         }
+
+        val title= findViewById<TextView>(R.id.titleExpenses)
 
         val isEinnahme : Boolean = intent.getBooleanExtra(IS_EINNAHMEN, false)
         if (isEinnahme){
@@ -64,6 +67,7 @@ class AddEditExpense : AppCompatActivity() {
             imageTag.visibility = GONE
             addButton.visibility = GONE
             recyclerView.visibility = GONE
+            title.text = "Einnahmen"
         }
 
         model.date.observe(this, Observer {
