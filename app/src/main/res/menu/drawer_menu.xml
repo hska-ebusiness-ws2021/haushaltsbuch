@@ -7,23 +7,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_baseline_home_24"
             android:title="Meine Übersicht" />
         <item
             android:id="@+id/nav_achievements"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_baseline_emoji_events_24"
             android:title="Meine Erfolge" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_baseline_people_alt_24"
             android:title="Dienstleistungen" />
         <item
             android:id="@+id/nav_requests"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_baseline_chat_bubble_24"
             android:title="Meine Anfragen" />
         <item
             android:id="@+id/nav_statistics"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_baseline_pie_chart_24"
             android:title="Statistiken" />
     </group>
 </menu>
