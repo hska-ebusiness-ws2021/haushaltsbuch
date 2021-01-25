@@ -137,13 +137,23 @@ class DBHelper {
     * function to add new category
     * */
 
-    fun addCategory(category: Category) = transaction {
-        Categories.insert { it[this.name] = category.name }
+    fun addCategory(category: Category) {
+        Log.i("QUERY", "addCategory()")
+        transaction {
+            Categories.insert { it[this.name] = category.name }
+        }
     }
 
-    /*
-    * function to update a category
-    * */
+    fun getCategory(name: String) {
+        Log.i("QUERY", "getCategory()")
+        transaction {
+            Categories.select { Categories.name.eq(name) }
+        }
+    }
+
+/*
+* function to update a category
+* */
 
     fun updateCategory(name: String) = transaction {
         Categories.update({ Categories.name.eq(name) }) {
@@ -151,28 +161,33 @@ class DBHelper {
         }
     }
 
-    /*
-    * function to delete one category
-    * */
+/*
+* function to delete one category
+* */
 
     fun deleteCategory(name: String) = transaction {
         Categories.deleteWhere { Categories.name.eq(name) }
     }
 
-    /*
-    * function to add new expense
-    * */
+/*
+* function to add new expense
+* */
 
-    fun addExpense(expense: Expense) = transaction {
-        Expenses.insert {
-            it[this.amount] = expense.amount
-            it[this.date] = expense.date
+    fun addExpense(expense: Expense) {
+        Log.i("QUERY", "addExpense()")
+        transaction {
+            Expenses.insert {
+                it[this.id] = expense.id
+                it[this.amount] = expense.amount
+                it[this.category] = expense.category.name
+                it[this.date] = expense.date
+            }
         }
     }
 
-    /*
-    * function to update expense
-    * */
+/*
+* function to update expense
+* */
 
     fun updateExpense(id: UUID, expense: Expense) = transaction {
         Expenses.update({ Expenses.id.eq(id) }) {
@@ -181,9 +196,9 @@ class DBHelper {
         }
     }
 
-    /*
-    * function to delete expense
-    * */
+/*
+* function to delete expense
+* */
 
     fun deleteExpense(id: UUID) = transaction {
         Expenses.deleteWhere { Expenses.id.eq(id) }

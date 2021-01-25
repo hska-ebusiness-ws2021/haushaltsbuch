@@ -104,9 +104,9 @@ class DevData(
             return@expense Expense(
                 id = UUID.randomUUID(),
                 amount = BigDecimal(amount),
-                points = amount / 10,
+                //points = amount / 10,
                 category = expenseCategories[Random.nextInt(0, expenseCategories.size - 1)],
-                person = people[customerIndex],
+                //person = people[customerIndex],
                 date = DateTime(
                     Random.nextInt(1950, 2015),
                     Random.nextInt(1, 12),

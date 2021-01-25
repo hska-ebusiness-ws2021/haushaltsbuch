@@ -6,7 +6,8 @@
     android:id="@+id/layout_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:colorBackground">
+    android:background="?android:colorBackground"
+    tools:context="com.example.haushaltsbuch.ui.addeditexpense.AddEditExpense">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -79,7 +80,7 @@
             android:layout_marginEnd="@dimen/spacing_large"
             android:layout_marginRight="@dimen/spacing_large"
             android:hint="Betrag"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:layout_marginTop="@dimen/spacing_large"
             android:textColor="#0C0C0C"
 
@@ -117,7 +118,6 @@
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_large"
             android:hint="Titel"
-            android:inputType="textCapSentences"
             android:layout_marginRight="@dimen/spacing_large"
             android:layout_marginLeft="@dimen/spacing_xlarge" />
 

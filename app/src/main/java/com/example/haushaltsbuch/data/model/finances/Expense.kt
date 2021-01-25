@@ -15,9 +15,11 @@ import org.joda.time.DateTime
 object Expenses : Table() {
     var id: Column<UUID> = uuid("id")
     var amount: Column<BigDecimal> = decimal("amount", 8, 2)
-    var points: Column<Int> = integer("points")
+
+    //var points: Column<Int> = integer("points")
     var category: Column<String> = reference("category", Categories.name)
-    var person: Column<UUID> = reference("person", Persons.id)
+
+    //var person: Column<UUID> = reference("person", Persons.id)
     var date: Column<DateTime> = date("date")
     override var primaryKey = PrimaryKey(id, name = "PK_Expense_ID")
 }
@@ -25,9 +27,9 @@ object Expenses : Table() {
 data class Expense(
     var id: ExpenseId,
     var amount: BigDecimal,
-    var points: Int,
+    //var points: Int,
     var category: Category,
-    var person: Person,
+    //var person: Person,
     var date: DateTime
 ) {}
 
