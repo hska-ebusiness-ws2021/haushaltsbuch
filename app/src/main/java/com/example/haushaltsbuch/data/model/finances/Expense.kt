@@ -12,7 +12,6 @@ import org.joda.time.DateTime
 * Expense table and data class
 *
 * */
-
 object Expenses : Table() {
     var id: Column<UUID> = uuid("id")
     var amount: Column<BigDecimal> = decimal("amount", 8, 2)

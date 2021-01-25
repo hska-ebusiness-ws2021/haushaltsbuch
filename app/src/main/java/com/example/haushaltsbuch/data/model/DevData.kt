@@ -9,7 +9,6 @@ import java.math.BigDecimal
 import java.util.*
 import kotlin.random.Random
 
-
 class DevData(
     private var categoryCount: Int = 10,
     private var achievementCount: Int = 20,
@@ -32,25 +31,26 @@ class DevData(
     var offers = List<Offer>(offerCount, ::generateOffer)
     var requests = List<Request>(requestCount, ::generateRequest)
 
-
     private fun generatePerson(index: Int): Person {
 
         var name = "Bernt"
         var surname = "Sieberts"
         var domain = "acme"
+
         return Person(
             id = UUID.randomUUID(),
             firstname = name,
             lastname = surname,
             email = "$name.$surname@$domain.de",
-            user = users[index],
+            user = users[index]
         )
+
     }
 
     private fun generateUser(index: Int): User {
         return User(
             username = "Bernle",
-            password = "password",
+            password = "password"
         )
     }
 
@@ -70,7 +70,7 @@ class DevData(
                 Random.nextInt(1, 60)
             ),
             subscription = subscriptions[Random.nextInt(0, subscriptions.size - 1)],
-            achievements = mutableListOf(),
+            achievements = mutableListOf()
         )
     }
 
@@ -91,7 +91,7 @@ class DevData(
         )
     }
 
-    private fun generateExpenseList(index: Int): List<Expense> {
+    private fun generateExpenseList(index: Int): List<Expense>{
         return List(customerCount, this.generateExpense(index))
     }
 
@@ -136,7 +136,7 @@ class DevData(
             id = UUID.randomUUID(),
             description = "Tisch",
             priceModel = pricemodels[index],
-            person = people[Random.nextInt(customerCount - 1, peopleCount - 1)],
+            person = people[Random.nextInt(customerCount - 1, peopleCount - 1)]
         )
     }
 
