@@ -4,13 +4,13 @@ import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.Column
 
 /*
-* Users Table
+* Users table and data class
 *
 * */
 
 object Users : Table() {
-    var username: Column<String> = varchar("username", 20)
-    var password: Column<String> = varchar("password", 20)
+    var username: Column<String> = varchar("username", 255)
+    var password: Column<String> = varchar("password", 255)
     override var primaryKey = PrimaryKey(username, name = "PK_Username")
 }
 

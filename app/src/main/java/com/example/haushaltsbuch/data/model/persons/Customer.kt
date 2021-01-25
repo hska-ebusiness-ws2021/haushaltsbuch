@@ -8,17 +8,17 @@ import org.joda.time.DateTime
 import java.util.UUID
 
 /*
-* Customers Table with database scheme
+* Customer table and data class
 *
 * */
 
 object Customers : Table() {
     var id: Column<UUID> = reference("id", Persons.id)
-    var email: Column<String> = reference("email", Persons.email).references(Users.username)
+    var email: Column<String> = reference("email", Persons.email)
     var firstname: Column<String> = reference("firstname", Persons.firstname)
     var lastname: Column<String> = reference("lastname", Persons.lastname)
-
-    //var user: Column<User> = reference("user", Users<>)
+    var username: Column<String> = reference("username", Users.username)
+    var password: Column<String> = reference("password", Users.password)
     var backupInfo: Column<String> = varchar("backupInfo", 50)
     var dateOfBirth: Column<DateTime> = date("date")
     var subscription: Column<UUID> = reference("subscription", SubscriptionModels.id)

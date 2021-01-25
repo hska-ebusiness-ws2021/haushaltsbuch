@@ -5,16 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.haushaltsbuch.ui.login.RegisterActivity">
-    <data>
-        <variable
-            android:firstname=""
-            android:lastname=""
-            android:email=""
-            android:username=""
-            android:password=""
-            android:type="com.example.haushaltsbuch.data.model.persons.Person"
-            tools:ignore="Deprecated" />
-    </data>
+    <!--
+        <data>
+            <variable
+                android:firstname=""
+                android:lastname=""
+                android:email=""
+                android:username=""
+                android:password=""
+                android:type="com.example.haushaltsbuch.data.model.persons.Person"
+                tools:ignore="Deprecated" />
+        </data>-->
+
     <Button
         android:id="@+id/registerBackButton"
         android:layout_width="wrap_content"
@@ -152,11 +154,11 @@
         tools:layout_editor_absoluteY="451dp" />
 
     <EditText
-        android:id="@+id/editTextNumberPassword"
+        android:id="@+id/editTextTextPassword"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
