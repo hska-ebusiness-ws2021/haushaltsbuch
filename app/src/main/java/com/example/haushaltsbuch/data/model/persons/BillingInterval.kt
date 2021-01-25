@@ -1,6 +1,6 @@
 package com.example.haushaltsbuch.data.model.persons
 
-enum class BillingIntervar(var value: String) {
+enum class BillingInterval(var value: String) {
     MONTHLY("m"),
-    YEARLY("y")
+    YEARLY("y");
 }

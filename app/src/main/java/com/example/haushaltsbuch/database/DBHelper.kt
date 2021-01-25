@@ -1,5 +1,6 @@
 package com.example.haushaltsbuch.database
 
+import android.util.Log
 import com.example.haushaltsbuch.data.model.finances.*
 import com.example.haushaltsbuch.data.model.persons.*
 import org.jetbrains.exposed.sql.*
@@ -7,15 +8,19 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DBHelper {
+/*
+ * Database operations helper class
+ * */
 
-    /*
-    * Database operations helper class
-    *
-    * function for get all users in the database
-    * */
+class DBHelper {
+    /**
+     * +++Queries+++
+     *
+     * get all userdata from database
+     */
 
     fun getAllUser(): ArrayList<User> {
+        Log.i("QUERY", "getAllUser()")
         val users: ArrayList<User> = arrayListOf()
         transaction {
             Users.selectAll().map {
@@ -31,42 +36,61 @@ class DBHelper {
     }
 
     /*
-    * function to get one user from database
+    * function to get username from database
     * */
 
-    fun getUser(username: String) = transaction {
-        Users.select { Users.username.eq(username) }
+    fun getUser(username: String) {
+        Log.i("QUERY", "getUser()")
+        transaction {
+            Users.select { Users.username.eq(username) }
+        }
     }
 
     /*
     * function to get user password from database
     * */
 
-    fun getUserPassword(pwd: String) = transaction {
-        Users.select { Users.password.eq(pwd) }
+    fun getUserPassword(pwd: String) {
+        Log.i("QUERY", "getUserPassword()")
+        transaction {
+            Users.select { Users.password.eq(pwd) }
+        }
+    }
+
+    /*
+   * function to reset user password
+   * */
+
+    fun resetPassword(pwd: String) = transaction {
+        Users.update({ (Users.password.eq(pwd)) }) {
+            it[this.password] = pwd
+        }
     }
 
     /*
     * function to add user to database
     * */
 
-    fun addUser(user: User): User {
+    fun addUser(user: User) {
+        Log.i("QUERY", "addUser()")
         transaction {
             Users.insert {
                 it[this.username] = user.username
                 it[this.password] = user.password
             }
         }
-        return user
     }
 
     /*
     * function to change username
     * */
 
-    fun changeUsername(username: String) = transaction {
-        Users.update({ Users.username.eq(username) }) {
-            it[this.username] = username
+    fun changeUsername(username: String) {
+        Log.i("QUERY", "changeUsername()")
+        transaction {
+            Users.update({ Users.username.eq(username) }) {
+                it[this.username] = username
+            }
         }
     }
 
@@ -74,22 +98,29 @@ class DBHelper {
     * function to delete user from database
     * */
 
-    fun deleteUser(username: String) = transaction {
-        Users.deleteWhere { Users.username.eq(username) }
+    fun deleteUser(username: String) {
+        Log.i("QUERY", "deleteUser()")
+        transaction {
+            Users.deleteWhere { Users.username.eq(username) }
+        }
     }
 
     /*
     * function to add person during registration
     * */
 
-    fun addPerson(person: Person) = transaction {
-        Persons.insert {
-            it[this.id] = UUID.randomUUID()
-            it[this.firstname] = person.firstname
-            it[this.lastname] = person.lastname
-            it[this.email] = person.email
-            it[this.username] = person.user.username
-            it[this.password] = person.user.password
+    fun addPerson(person: Person) {
+        Log.i("QUERY", "addPerson()")
+        transaction {
+            Persons.insert {
+                it[this.id] = person.id
+                it[this.firstname] = person.firstname
+                it[this.lastname] = person.lastname
+                it[this.email] = person.email
+                it[this.username] = person.user.username
+                it[this.password] = person.user.password
+            }
+            println("Persons: ${Persons.selectAll()}")
         }
     }
 
@@ -101,15 +132,6 @@ class DBHelper {
         Persons.deleteWhere { Persons.id.eq(id) }
     }
 
-    /*
-    * function to reset password
-    * */
-
-    fun resetPassword(pwd: String) = transaction {
-        Users.update({ (Users.password.eq(pwd)) }) {
-            it[this.password] = pwd
-        }
-    }
 
     /*
     * function to add new category

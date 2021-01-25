@@ -7,7 +7,7 @@ import org.jetbrains.exposed.sql.Table
 import java.util.UUID
 
 /*
-* Requests Table
+* Request table and data class
 *
 * */
 

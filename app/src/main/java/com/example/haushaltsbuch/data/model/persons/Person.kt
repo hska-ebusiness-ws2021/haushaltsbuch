@@ -3,20 +3,19 @@ package com.example.haushaltsbuch.data.model.persons
 import java.util.UUID
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Table
-import com.example.haushaltsbuch.data.model.persons.User
 
 /*
-* Persons Table
+* Persons table and class
 *
 * */
 
 object Persons : Table() {
     var id: Column<UUID> = uuid("id")
-    var email: Column<String> = varchar("email", 40)
-    var firstname: Column<String> = varchar("firstname", 20)
-    var lastname: Column<String> = varchar("lastname", 20)
-    var username = reference("username", Users.username)
-    var password = reference("password", Users.password)
+    var email: Column<String> = varchar("email", 255)
+    var firstname: Column<String> = varchar("firstname", 255)
+    var lastname: Column<String> = varchar("lastname", 255)
+    var username: Column<String> = reference("username", Users.username)
+    var password: Column<String> = reference("password", Users.password)
     override var primaryKey = PrimaryKey(id, name = "PK_Person_ID")
 }
 

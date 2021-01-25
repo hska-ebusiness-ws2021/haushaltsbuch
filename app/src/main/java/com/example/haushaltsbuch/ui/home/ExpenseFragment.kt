@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.haushaltsbuch.R
-import com.example.haushaltsbuch.data.model.FakeData
+import com.example.haushaltsbuch.data.model.DevData
 import com.example.haushaltsbuch.data.model.finances.Expense
 
 /**
@@ -18,7 +18,7 @@ import com.example.haushaltsbuch.data.model.finances.Expense
 class ExpenseFragment : Fragment() {
 
     private var columnCount = 1
-    private val fakeData = FakeData(2,1,1,2)
+    private val fakeData = DevData(2, 1, 1, 2)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -7,15 +7,15 @@ import org.jetbrains.exposed.sql.Table
 import java.util.UUID
 
 /*
-* Offers Table
+* Offer table and data class
 *
 * */
 
 object Offers : Table() {
     var id: Column<UUID> = uuid("id")
     var description: Column<String> = varchar("description", 255)
-    var priceModel: Column<String> = varchar("pricemodel", 20)
-    var personId: Column<UUID> = reference("id", Persons.id)
+    var priceModel: Column<UUID> = reference("pricemodel", PriceModels.id)
+    var personId: Column<UUID> = reference("person_id", Persons.id)
     override var primaryKey = PrimaryKey(id, name = "PK_Offer_ID")
 }
 

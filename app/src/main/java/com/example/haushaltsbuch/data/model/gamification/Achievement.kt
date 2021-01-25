@@ -5,7 +5,7 @@ import org.jetbrains.exposed.sql.Table
 import java.util.UUID
 
 /*
-* Achievements Table
+* Achievement table and data class
 *
 * */
 

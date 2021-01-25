@@ -80,13 +80,13 @@ class DevData(
                 id = UUID.randomUUID(),
                 name = "STANDARD",
                 price = BigDecimal(0),
-                billingIntervar = BillingIntervar.YEARLY,
+                billingInterval = BillingInterval.YEARLY,
             ),
             SubscriptionModel(
                 id = UUID.randomUUID(),
                 name = "PREMIUM",
                 price = BigDecimal(500),
-                billingIntervar = BillingIntervar.YEARLY
+                billingInterval = BillingInterval.YEARLY
             ),
         )
     }
@@ -145,9 +145,9 @@ class DevData(
             id = UUID.randomUUID(),
             price = BigDecimal(Random.nextInt(1, 10000)),
             isSubscription = Random.nextBoolean(),
-            intervar = listOf<BillingIntervar>(
-                BillingIntervar.YEARLY,
-                BillingIntervar.MONTHLY,
+            intervar = listOf<BillingInterval>(
+                BillingInterval.YEARLY,
+                BillingInterval.MONTHLY,
             )[Random.nextInt(0, 2)]
         )
     }

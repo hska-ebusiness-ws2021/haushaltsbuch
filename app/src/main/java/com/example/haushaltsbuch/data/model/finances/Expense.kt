@@ -9,7 +9,7 @@ import org.jetbrains.exposed.sql.jodatime.date
 import org.joda.time.DateTime
 
 /*
-* Expenses Table
+* Expense table and data class
 *
 * */
 
