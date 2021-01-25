@@ -29,13 +29,9 @@ class PieChart : AppCompatActivity() {
         setContentView(R.layout.activity_pie_chart)
         setSupportActionBar(findViewById(R.id.toolbar))
         tfLight = Typeface.createFromAsset(assets, "OpenSans-Light.ttf")
-        findViewById<FloatingActionButton>(R.id.button_add).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
 
-        }
         chart = findViewById<com.github.mikephil.charting.charts.PieChart>(R.id.chart1)
-        title = "Diagramm"
+        title = "Übersicht deiner Ausgaben"
 
         chart.setUsePercentValues(true)
         chart.description.isEnabled = false
@@ -58,7 +54,6 @@ class PieChart : AppCompatActivity() {
         chart.setDrawCenterText(true)
 
         chart.rotationAngle = 0f
-        // enable rotation of the chart by touch
         // enable rotation of the chart by touch
         chart.isRotationEnabled = true
         chart.isHighlightPerTapEnabled = true
@@ -93,8 +88,7 @@ class PieChart : AppCompatActivity() {
         val entries = ArrayList<PieEntry>()
 
         val parties = arrayOf(
-            "Einkaufen", "Haushalt", "Auto", "Urlaub", "Party E", "Party F", "Party G", "Party H",
-            "Party I", "Party J"
+            "Lebensmittel", "Haushalt", "Miete", "Transport", "Ausgehen", "Kleidung", "Studium", "Urlaub"
         )
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
