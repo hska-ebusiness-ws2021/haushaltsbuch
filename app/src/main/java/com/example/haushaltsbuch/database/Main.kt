@@ -11,7 +11,10 @@ import org.jetbrains.exposed.sql.Database
 
 class Main {
     /*
-    * Class to create a database and tables
+    * Main class to connect and create a database with all tables.
+    * In this case it is a in-memory database. Could also be a in-file database.
+    * We used ORM Exposed Framework from JetBrains to implement our database.
+    *
     * */
 
     fun main() {

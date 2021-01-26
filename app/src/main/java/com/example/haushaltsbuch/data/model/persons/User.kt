@@ -14,7 +14,6 @@ object Users : Table() {
     override var primaryKey = PrimaryKey(username, name = "PK_Username")
 }
 
-
 data class User(
     var username: String,
     var password: String

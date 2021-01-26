@@ -9,14 +9,15 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 /*
- * Database operations helper class
+ *Class for database queries.
+ *
  * */
 
 class DBHelper {
+
     /**
-     * +++Queries+++
+     * query to get all userdata from database.
      *
-     * get all userdata from database
      */
 
     fun getAllUser(): ArrayList<User> {
@@ -36,7 +37,7 @@ class DBHelper {
     }
 
     /*
-    * function to get username from database
+    * query to get username from database.
     * */
 
     fun getUser(username: String) {
@@ -47,7 +48,7 @@ class DBHelper {
     }
 
     /*
-    * function to get user password from database
+    * query to get user password from database.
     * */
 
     fun getUserPassword(pwd: String) {
@@ -58,7 +59,7 @@ class DBHelper {
     }
 
     /*
-   * function to reset user password
+    * query to reset user password.
    * */
 
     fun resetPassword(pwd: String) = transaction {
@@ -68,7 +69,7 @@ class DBHelper {
     }
 
     /*
-    * function to add user to database
+    * query to add user to database
     * */
 
     fun addUser(user: User) {
@@ -82,7 +83,7 @@ class DBHelper {
     }
 
     /*
-    * function to change username
+    * query to change username
     * */
 
     fun changeUsername(username: String) {
@@ -95,7 +96,7 @@ class DBHelper {
     }
 
     /*
-    * function to delete user from database
+    * query to delete user from database
     * */
 
     fun deleteUser(username: String) {
@@ -106,7 +107,7 @@ class DBHelper {
     }
 
     /*
-    * function to add person during registration
+    * query to add person during registration
     * */
 
     fun addPerson(person: Person) {
@@ -125,7 +126,7 @@ class DBHelper {
     }
 
     /*
-    * function to delete person
+    * query to delete person
     * */
 
     fun deletePerson(id: UUID) = transaction {
@@ -134,7 +135,7 @@ class DBHelper {
 
 
     /*
-    * function to add new category
+    * query to add new category.
     * */
 
     fun addCategory(category: Category) {
@@ -144,6 +145,10 @@ class DBHelper {
         }
     }
 
+    /*
+    * query to get category.
+    * */
+
     fun getCategory(name: String) {
         Log.i("QUERY", "getCategory()")
         transaction {
@@ -151,9 +156,9 @@ class DBHelper {
         }
     }
 
-/*
-* function to update a category
-* */
+    /*
+    * query to update a category.
+    * */
 
     fun updateCategory(name: String) = transaction {
         Categories.update({ Categories.name.eq(name) }) {
@@ -161,17 +166,17 @@ class DBHelper {
         }
     }
 
-/*
-* function to delete one category
-* */
+    /*
+    * query to delete one category.
+    * */
 
     fun deleteCategory(name: String) = transaction {
         Categories.deleteWhere { Categories.name.eq(name) }
     }
 
-/*
-* function to add new expense
-* */
+    /*
+    * query to add new expense.
+    * */
 
     fun addExpense(expense: Expense) {
         Log.i("QUERY", "addExpense()")
@@ -186,9 +191,9 @@ class DBHelper {
         }
     }
 
-/*
-* function to update expense
-* */
+    /*
+    * query to update expense.
+    * */
 
     fun updateExpense(id: UUID, expense: Expense) = transaction {
         Expenses.update({ Expenses.id.eq(id) }) {
@@ -197,9 +202,9 @@ class DBHelper {
         }
     }
 
-/*
-* function to delete expense
-* */
+    /*
+    * query to delete expense.
+    * */
 
     fun deleteExpense(id: UUID) = transaction {
         Expenses.deleteWhere { Expenses.id.eq(id) }

@@ -15,13 +15,6 @@ object SubscriptionModels : Table() {
     var name: Column<String> = varchar("name", 20)
     var price: Column<BigDecimal> = decimal("price", 8, 2)
     var billingInterval = enumerationByName("value", 1, BillingInterval::class)
-
-    /*var billingInterval: Column<BillingInterval> = customEnumeration(
-        "interval",
-        "enum",
-        { value -> BillingInterval.valueOf(value as String) },
-        { it.name }
-    )*/
     override var primaryKey = PrimaryKey(id, name = "PK_Sub_ID")
 }
 
