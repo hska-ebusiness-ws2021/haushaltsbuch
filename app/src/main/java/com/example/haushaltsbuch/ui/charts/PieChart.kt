@@ -49,13 +49,9 @@ class PieChart : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         toggle.syncState()
 
         tfLight = Typeface.createFromAsset(assets, "OpenSans-Light.ttf")
-        findViewById<FloatingActionButton>(R.id.button_add).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
 
-        }
         chart = findViewById<com.github.mikephil.charting.charts.PieChart>(R.id.chart1)
-        title = "Diagramm"
+        title = "Übersicht deiner Ausgaben"
 
         chart.setUsePercentValues(true)
         chart.description.isEnabled = false
@@ -79,21 +75,8 @@ class PieChart : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
         chart.rotationAngle = 0f
         // enable rotation of the chart by touch
-        // enable rotation of the chart by touch
         chart.isRotationEnabled = true
         chart.isHighlightPerTapEnabled = true
-
-        // chart.setUnit(" €");
-        // chart.setDrawUnitsInChart(true);
-
-        // add a selection listener
-
-        // chart.setUnit(" €");
-        // chart.setDrawUnitsInChart(true);
-
-        // add a selection listener
-        // chart.setOnChartValueSelectedListener(this)
-
 
         chart.animateY(1400, Easing.EaseInOutQuad)
         // chart.spin(2000, 0, 360);;
@@ -113,12 +96,9 @@ class PieChart : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         val entries = ArrayList<PieEntry>()
 
         val parties = arrayOf(
-            "Einkaufen", "Haushalt", "Auto", "Urlaub", "Party E", "Party F", "Party G", "Party H",
-            "Party I", "Party J"
+            "Lebensmittel", "Haushalt", "Miete", "Transport", "Ausgehen", "Kleidung", "Studium", "Urlaub"
         )
 
-        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
-        // the chart.
         for (i in 0 until count) {
             entries.add(
                 PieEntry(
@@ -154,16 +134,12 @@ class PieChart : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         dataSet.colors = colors
         //dataSet.setSelectionShift(0f);
 
-        //dataSet.setSelectionShift(0f);
         val data = PieData(dataSet)
         data.setValueFormatter(PercentFormatter())
         data.setValueTextSize(11f)
         data.setValueTextColor(Color.BLACK)
          data.setValueTypeface(tfLight)
         chart.data = data
-
-
-        // undo all highlights
 
         // undo all highlights
         chart.highlightValues(null)
@@ -173,10 +149,6 @@ class PieChart : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
     private fun generateCenterSpannableText(): SpannableString {
         val s = SpannableString("Haushalsbuch") // Name der App
-        //        s.setSpan(new RelativeSizeSpan(1.7f), 0, 14, 0);
-//        s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
-//        s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);
-//        s.setSpan(new RelativeSizeSpan(.8f), 14, s.length() - 15, 0);
         s.setSpan(StyleSpan(Typeface.ITALIC), 0, s.length, 0)
         s.setSpan(ForegroundColorSpan(ColorTemplate.getHoloBlue()), 0, s.length, 0)
         return s

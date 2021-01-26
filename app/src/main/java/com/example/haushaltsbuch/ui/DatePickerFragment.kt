@@ -1,15 +1,19 @@
-package com.example.haushaltsbuch.ui.addeditexpense
+package com.example.haushaltsbuch.ui
 
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import java.util.*
 
-class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
-    private val model: AddExpenseViewModel by activityViewModels()
+class DatePickerFragment() : DialogFragment(), DatePickerDialog.OnDateSetListener {
+    private lateinit var date: MutableLiveData<Date>
+
+    constructor(dateData: MutableLiveData<Date>) : this(){
+        date = dateData
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // Use the current date as the default date in the picker
@@ -23,7 +27,7 @@ class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener 
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-        model.setDate(Date(year - 1900 ,month,day))
+        date.value = Date(year - 1900 ,month,day)
     }
 
 }

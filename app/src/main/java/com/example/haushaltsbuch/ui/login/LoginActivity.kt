@@ -9,20 +9,24 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.*
 import com.example.haushaltsbuch.ui.home.HomeActivity
-
 import com.example.haushaltsbuch.R
+import com.example.haushaltsbuch.database.Main
 
 class LoginActivity : AppCompatActivity() {
 
+    private val createDB = Main()
     private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        Log.i("CREATE", "LoginActivity onCreate()")
+        createDB.main()
 
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         val username = findViewById<EditText>(R.id.username)
@@ -32,9 +36,8 @@ class LoginActivity : AppCompatActivity() {
         val registerButton = findViewById<Button>(R.id.register)
         val resetPasswordButton = findViewById<TextView>(R.id.resetPassword)
 
-
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())
-                .get(LoginViewModel::class.java)
+            .get(LoginViewModel::class.java)
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
@@ -74,16 +77,16 @@ class LoginActivity : AppCompatActivity() {
 
         username.afterTextChanged {
             loginViewModel.loginDataChanged(
-                    username.text.toString(),
-                    password.text.toString()
+                username.text.toString(),
+                password.text.toString()
             )
         }
 
         password.apply {
             afterTextChanged {
                 loginViewModel.loginDataChanged(
-                        username.text.toString(),
-                        password.text.toString()
+                    username.text.toString(),
+                    password.text.toString()
                 )
             }
 
@@ -91,8 +94,8 @@ class LoginActivity : AppCompatActivity() {
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
                         loginViewModel.login(
-                                username.text.toString(),
-                                password.text.toString()
+                            username.text.toString(),
+                            password.text.toString()
                         )
                 }
                 false
@@ -116,9 +119,9 @@ class LoginActivity : AppCompatActivity() {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
         Toast.makeText(
-                applicationContext,
-                "$welcome $displayName",
-                Toast.LENGTH_LONG
+            applicationContext,
+            "$welcome $displayName",
+            Toast.LENGTH_LONG
         ).show()
     }
 
@@ -126,12 +129,14 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
 
-    fun navigateToRegisterView(){
-        setContentView(R.layout.activity_register)
+    fun navigateToRegisterView() {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
     }
 
-    fun navigateToResetPasswordView(){
-        setContentView(R.layout.activity_reset_password)
+    fun navigateToResetPasswordView() {
+        val intent = Intent(this, ResetPasswordActivity::class.java)
+        startActivity(intent)
     }
 }
 

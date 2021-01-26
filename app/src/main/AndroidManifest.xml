@@ -14,10 +14,19 @@
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Haushaltsbuch.NoActionBar" />
         <activity
+            android:name=".ui.login.RegisterActivity"
+            android:label="RegisterActivity"
+            android:theme="@style/Theme.Haushaltsbuch.NoActionBar" />
+        <activity
             android:name=".ui.addeditexpense.AddEditExpense"
             android:label="@string/title_activity_add_edit_expense"
             android:theme="@style/Theme.Haushaltsbuch.NoActionBar">
         </activity>
+        <activity
+            android:name=".ui.goals.AddGoals"
+            android:label="add_Goals"
+            android:theme="@style/Theme.Haushaltsbuch.NoActionBar" />
+
         <activity
             android:name=".ui.charts.PieChart"
             android:label="@string/title_activity_pie_chart"

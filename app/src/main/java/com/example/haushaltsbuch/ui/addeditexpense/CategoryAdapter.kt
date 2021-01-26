@@ -46,5 +46,4 @@ class CategoryAdapter(private val dataSet: ArrayList<TextWithAmount>) :
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
-
 }

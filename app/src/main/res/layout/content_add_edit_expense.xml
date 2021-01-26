@@ -6,7 +6,8 @@
     android:id="@+id/layout_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:colorBackground">
+    android:background="?android:colorBackground"
+    tools:context="com.example.haushaltsbuch.ui.addeditexpense.AddEditExpense">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,27 +20,36 @@
             android:background="?colorPrimary"
 
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
-            <Button
-                android:id="@+id/button_save"
+            <TextView
+                android:id="@+id/titleExpenses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
                 android:gravity="center_horizontal"
-                android:text="Save"
-                android:textAlignment="center"
-
-                android:textAppearance="?attr/textAppearanceHeadline5"
-                android:textColor="@color/black"
-                android:textColorHighlight="#CED2EC"
-                app:backgroundTint="#FFA630"
+                android:text="Ausgaben hinzufügen"
+                android:textColor="#FFFFFF"
+                android:textIsSelectable="false"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-               />
+                app:layout_constraintHorizontal_bias="0.787"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zurück"
+                app:backgroundTint="@color/colorAccent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -47,13 +57,13 @@
             android:id="@+id/imageEuro"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            app:layout_constraintStart_toStartOf="parent"
+
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            app:srcCompat="@drawable/ic_baseline_euro_symbol_24"
             app:layout_constraintBottom_toBottomOf="@+id/editTextAmount"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/editTextAmount"
-            />
+            app:srcCompat="@drawable/ic_baseline_euro_symbol_24" />
 
         <EditText
             android:id="@+id/editTextAmount"
@@ -61,13 +71,12 @@
             android:layout_height="56dp"
             android:layout_marginStart="@dimen/spacing_xlarge"
             android:layout_marginLeft="@dimen/spacing_xlarge"
+            android:layout_marginTop="@dimen/spacing_large"
             android:layout_marginEnd="@dimen/spacing_large"
             android:layout_marginRight="@dimen/spacing_large"
-            android:hint="@string/amount"
-            android:inputType="numberDecimal"
-            android:layout_marginTop="@dimen/spacing_large"
+            android:hint="Betrag"
+            android:inputType="number"
             android:textColor="#0C0C0C"
-
 
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,13 +87,12 @@
             android:id="@+id/imageTitle"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/editTextTitle"
-            app:layout_constraintTop_toTopOf="@id/editTextTitle"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            app:srcCompat="@drawable/ic_baseline_title_24"
-            />
+            app:layout_constraintBottom_toBottomOf="@id/editTextTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/editTextTitle"
+            app:srcCompat="@drawable/ic_baseline_title_24" />
         <!--
        app:srcCompat="@drawable/ic_title_24dp"
        app:tint="@color/color_on_surface_emphasis_medium"
@@ -95,27 +103,26 @@
             android:id="@+id/editTextTitle"
             android:layout_width="0dp"
             android:layout_height="56dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageTitle"
-            app:layout_constraintTop_toBottomOf="@+id/editTextAmount"
             android:layout_marginStart="@dimen/spacing_xlarge"
+            android:layout_marginLeft="@dimen/spacing_xlarge"
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_large"
-            android:hint="@string/title_Title"
-            android:inputType="textCapSentences"
             android:layout_marginRight="@dimen/spacing_large"
-            android:layout_marginLeft="@dimen/spacing_xlarge" />
+            android:hint="Titel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageTitle"
+            app:layout_constraintTop_toBottomOf="@+id/editTextAmount" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageTags"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/containerTags"
-            app:layout_constraintTop_toTopOf="@+id/containerTags"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            app:srcCompat="@drawable/ic_baseline_style_24"/>
+            app:layout_constraintBottom_toBottomOf="@+id/containerTags"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/containerTags"
+            app:srcCompat="@drawable/ic_baseline_style_24" />
         <!--
             app:srcCompat="@drawable/ic_local_24dp"
             app:tint="@color/color_on_surface_emphasis_medium"
@@ -124,16 +131,16 @@
             android:id="@+id/containerTags"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_xlarge"
+            android:layout_marginLeft="@dimen/spacing_xlarge"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
             android:background="?selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageTags"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTitle"
-            android:layout_marginStart="@dimen/spacing_xlarge"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginEnd="@dimen/spacing_large"
-            android:layout_marginLeft="@dimen/spacing_xlarge"
-            android:layout_marginRight="@dimen/spacing_large">
-        <!--
+            app:layout_constraintTop_toBottomOf="@+id/editTextTitle">
+            <!--
             -->
             <!--
             android:textColor="@color/color_on_surface_emphasis_medium"
@@ -147,11 +154,12 @@
                 android:paddingTop="@dimen/spacing_large"
                 android:paddingEnd="@dimen/spacing_small"
                 android:paddingBottom="@dimen/spacing_large"
-                android:text="@string/select_tags"
+                android:text="Kategorie auswählen"
                 android:textAppearance="?attr/textAppearanceSubtitle1"
                 android:textColor="@color/black" />
 
             />
+
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chip_group"
                 android:layout_width="match_parent"
@@ -161,8 +169,7 @@
                 android:layout_marginBottom="@dimen/spacing_normal"
                 android:paddingStart="@dimen/spacing_small"
                 android:paddingEnd="@dimen/spacing_small"
-                app:chipSpacing="@dimen/spacing_normal"
-                />
+                app:chipSpacing="@dimen/spacing_normal" />
         </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -170,11 +177,11 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/textDate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textDate"
-            app:srcCompat="@drawable/ic_baseline_date_range_24"
-            android:layout_marginLeft="16dp" />
+            app:srcCompat="@drawable/ic_baseline_date_range_24" />
         <!-- app:tint="@color/color_on_surface_emphasis_medium"
         -->
 
@@ -225,34 +232,75 @@
             android:focusable="true" />
             -->
 
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="410dp"
+            android:layout_height="397dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textDate"
 
-          >
+            >
+
+            <Button
+                android:id="@+id/button_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Abbrechen"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textColor="@color/white"
+                android:textColorHighlight="#CED2EC"
+                app:backgroundTint="@color/gray_400"
+
+                app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.204"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/recycler_view"
+                app:layout_constraintVertical_bias="0.918" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="LinearLayoutManager"
-                />
+                tools:layout_editor_absoluteX="-17dp"
+                tools:layout_editor_absoluteY="0dp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/button_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
                 android:focusable="true"
-                app:srcCompat="@drawable/ic_baseline_add_24"
+                app:backgroundTint="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_view"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.954"
+                app:layout_constraintStart_toStartOf="@+id/recycler_view"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.653"
+                app:srcCompat="@drawable/ic_baseline_add_24" />
+
+            <Button
+                android:id="@+id/button_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Speichern"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textColor="@color/white"
+                android:textColorHighlight="#CED2EC"
+                app:backgroundTint="@color/colorAccent"
+
+                app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.83"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/recycler_view"
+                app:layout_constraintVertical_bias="0.918" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
