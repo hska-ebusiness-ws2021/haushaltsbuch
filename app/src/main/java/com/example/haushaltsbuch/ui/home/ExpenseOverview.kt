@@ -11,6 +11,7 @@ import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.haushaltsbuch.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -55,7 +56,7 @@ class ExpenseOverview : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val createExpense: ImageButton = view.findViewById(R.id.overview_create_expense)
+        val createExpense: FloatingActionButton = view.findViewById(R.id.overview_create_expense)
         createExpense.setOnClickListener{
             parentFragmentManager.commit {
                 setReorderingAllowed(true)
