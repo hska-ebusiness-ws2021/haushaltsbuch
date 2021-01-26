@@ -113,6 +113,7 @@ class DevData(
                 id = UUID.randomUUID(),
                 amount = BigDecimal(amount),
                 //points = amount / 10,
+                title = "",
                 // take a random expense category and assign it to expense
                 category = expenseCategories[Random.nextInt(0, expenseCategories.size - 1)],
                 //person = people[customerIndex],

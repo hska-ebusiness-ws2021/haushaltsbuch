@@ -56,6 +56,7 @@ class AddEditExpense : AppCompatActivity() {
         // ===================================================================
         val amount = findViewById<EditText>(R.id.editTextAmount)
         val category = findViewById<Spinner>(R.id.tags_spinner)
+        val titleText = findViewById<EditText>(R.id.editTextTitle)
         val imageTag = findViewById<AppCompatImageView>(R.id.imageTags)
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
         val addButton = findViewById<FloatingActionButton>(R.id.button_add)
@@ -66,7 +67,6 @@ class AddEditExpense : AppCompatActivity() {
         val spinner: Spinner = findViewById(R.id.tags_spinner)
         val title = findViewById<TextView>(R.id.titleExpenses)
         // ===================================================================
-
 
 
         val expenseAdapter = CategoryAdapter(model.expenseCategorieList)
@@ -106,12 +106,17 @@ class AddEditExpense : AppCompatActivity() {
         }
 
         saveButton.setOnClickListener {
-            val amount = BigDecimal(amount.text.toString())
-            val id = UUID.randomUUID()
-            val category = category.selectedItem.toString()
-            val date = DateTime(model.date.value)
-            val dbHelper = DBHelper()
-            dbHelper.addExpense(Expense(id, amount, Category(category), date))
+            try {
+                val id = UUID.randomUUID()
+                val amount = BigDecimal(amount.text.toString())
+                val title = titleText.text.toString()
+                val category = category.selectedItem.toString()
+                val date = DateTime(model.date.value)
+                val dbHelper = DBHelper()
+                dbHelper.addExpense(Expense(id, amount, title, Category(category), date))
+            } catch (exception: NumberFormatException) {
+                exception.stackTraceToString()
+            }
             Toast.makeText(this, "Save!", Toast.LENGTH_SHORT).show()
             setResult(Activity.RESULT_OK);
         }

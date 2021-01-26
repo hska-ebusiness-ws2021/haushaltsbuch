@@ -10,6 +10,7 @@ import com.example.haushaltsbuch.data.model.persons.Person
 import com.example.haushaltsbuch.database.DBHelper
 import com.example.haushaltsbuch.databinding.ActivityRegisterBinding
 import com.example.haushaltsbuch.databinding.ActivityResetPasswordBinding
+import com.example.haushaltsbuch.ui.home.HomeActivity
 import java.util.*
 
 class ResetPasswordActivity : AppCompatActivity() {
@@ -23,14 +24,20 @@ class ResetPasswordActivity : AppCompatActivity() {
         setContentView(view)
 
         val emailButton = binding.button9
-
+        val backButton = binding.button8
         emailButton.setOnClickListener {
-            navigateToPassword()
+            //changePassword(it)
+            navigateToLogin()
+        }
+        backButton.setOnClickListener {
+            navigateToLogin()
         }
     }
 
 
-    fun navigateToPassword() {
+    fun navigateToLogin() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 
     fun changePassword(view: View) {
@@ -41,7 +48,9 @@ class ResetPasswordActivity : AppCompatActivity() {
         if (email.equals(databaseHandler.getUser(email))) {
             val status = databaseHandler.resetPassword(password)
             //after onClick
-            binding.editTextTextEmailAddress2.clearComposingText()
+            binding.editTextTextEmailAddress2.setText("")
         }
+
+        navigateToLogin()
     }
 }
