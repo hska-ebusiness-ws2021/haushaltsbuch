@@ -91,7 +91,7 @@ class DevData(
         )
     }
 
-    private fun generateExpenseList(index: Int): List<Expense>{
+    private fun generateExpenseList(index: Int): List<Expense> {
         return List(customerCount, this.generateExpense(index))
     }
 
@@ -105,6 +105,7 @@ class DevData(
                 id = UUID.randomUUID(),
                 amount = BigDecimal(amount),
                 //points = amount / 10,
+                title = "",
                 category = expenseCategories[Random.nextInt(0, expenseCategories.size - 1)],
                 //person = people[customerIndex],
                 date = DateTime(

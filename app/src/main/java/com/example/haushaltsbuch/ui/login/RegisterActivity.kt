@@ -42,7 +42,6 @@ class RegisterActivity : AppCompatActivity() {
 
     fun userRegister(view: View) {
         Log.i("REGISTER", "RegisterActivity2")
-        //binding.apply {
         val id = UUID.randomUUID()
         val firstname = binding.editTextTextPersonName.toString()
         val lastname = binding.editTextTextPersonName2.toString()
@@ -52,7 +51,6 @@ class RegisterActivity : AppCompatActivity() {
         val passwordConfirm = binding.editTextTextPassword.toString()
         val dbHelper = DBHelper()
 
-        //if (firstname != "" && lastname != "" && email != "" && username != "" && password != "" && passwordConfirm != "" && password == passwordConfirm) {
         dbHelper.addUser(User(username, password))
         dbHelper.addPerson(
             Person(
@@ -63,7 +61,6 @@ class RegisterActivity : AppCompatActivity() {
                 (User(username, password))
             )
         )
-        dbHelper.getAllUser()
         //after onClick
         binding.editTextTextPersonName.setText("")
         binding.editTextTextPersonName2.setText("")
@@ -71,9 +68,7 @@ class RegisterActivity : AppCompatActivity() {
         binding.editTextTextPersonName3.setText("")
         binding.editTextTextPassword2.setText("")
         binding.editTextTextPassword.setText("")
-        //}
 
         navigateToLogin()
-        //}
     }
 }

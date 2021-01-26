@@ -179,6 +179,7 @@ class DBHelper {
             Expenses.insert {
                 it[this.id] = expense.id
                 it[this.amount] = expense.amount
+                it[this.title] = expense.title
                 it[this.category] = expense.category.name
                 it[this.date] = expense.date
             }

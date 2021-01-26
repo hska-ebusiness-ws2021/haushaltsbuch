@@ -1,5 +1,6 @@
 package com.example.haushaltsbuch.ui.addeditexpense
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View.GONE
 import android.widget.*
@@ -12,14 +13,17 @@ import com.example.haushaltsbuch.R
 import com.example.haushaltsbuch.data.model.finances.Category
 import com.example.haushaltsbuch.data.model.finances.Expense
 import com.example.haushaltsbuch.database.DBHelper
+import com.example.haushaltsbuch.databinding.ActivityAddEditExpenseBinding
 import com.example.haushaltsbuch.ui.DatePickerFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
 import java.text.SimpleDateFormat
 import java.util.*
 import com.example.haushaltsbuch.databinding.ContentAddEditExpenseBinding
+import com.example.haushaltsbuch.databinding.ContentExpenseListBinding
 import org.joda.time.DateTime
 import java.math.BigDecimal
+import kotlin.text.toBigDecimal
 
 class AddEditExpense : AppCompatActivity() {
     private val model: AddExpenseViewModel by viewModels()
@@ -27,7 +31,6 @@ class AddEditExpense : AppCompatActivity() {
     companion object {
         const val IS_EINNAHMEN = "isEinnahmen"
     }
-
 
     val parties = arrayOf(
         "Lebensmittel",
@@ -51,7 +54,7 @@ class AddEditExpense : AppCompatActivity() {
 
         val saveButton = binding.buttonSave
 
-        setContentView(R.layout.content_add_edit_expense)
+        //setContentView(R.layout.content_add_edit_expense)
         setSupportActionBar(findViewById(R.id.toolbar))
         val amount = findViewById<EditText>(R.id.editTextAmount)
         val category = findViewById<Spinner>(R.id.tags_spinner)
@@ -74,13 +77,21 @@ class AddEditExpense : AppCompatActivity() {
         //val saveButton = findViewById<Button>(R.id.button_save)
 
         saveButton.setOnClickListener {
-            val amount = BigDecimal(binding.editTextAmount.toString())
-            val id = UUID.randomUUID()
-            val category = binding.editTextTitle.toString()
-            val date = DateTime(binding.textDate.toString())
-            val dbHelper = DBHelper()
-            dbHelper.addExpense(Expense(id, amount, Category(category), date))
+            try {
+                val id = UUID.randomUUID()
+                val amount = BigDecimal(binding.editTextAmount.toString())//toBigDecimal()
+                val title = binding.editTextTitle.toString()
+                val category = binding.tagsSpinner.toString()
+                val date = DateTime(binding.textDate.toString())
+                val dbHelper = DBHelper()
+                dbHelper.addExpense(Expense(id, amount, title, Category(category), date))
+            } catch (exception: NumberFormatException) {
+                exception.stackTraceToString()
+            }
+
             Toast.makeText(this, "Save!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, ActivityAddEditExpenseBinding::class.java)
+            startActivity(intent)
         }
 
         val spinner: Spinner = findViewById(R.id.tags_spinner)
@@ -105,9 +116,8 @@ class AddEditExpense : AppCompatActivity() {
         }
 
         model.date.observe(this, Observer {
-            val format = SimpleDateFormat("MMM dd.yyyy")
+            val format = SimpleDateFormat("MM.dd.yyyy")
             date.text = format.format(it)
         })
-
     }
 }
