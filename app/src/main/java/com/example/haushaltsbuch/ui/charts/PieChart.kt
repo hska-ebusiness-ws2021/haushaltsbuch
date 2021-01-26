@@ -28,8 +28,10 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
+/*
+ Ui activity for pie chart
+ */
 class PieChart : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
     private lateinit var chart: com.github.mikephil.charting.charts.PieChart
     private var tf: Typeface? = null
     protected var tfLight: Typeface? = null
@@ -50,6 +52,7 @@ class PieChart : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
 
         tfLight = Typeface.createFromAsset(assets, "OpenSans-Light.ttf")
 
+        // Map view element
         chart = findViewById<com.github.mikephil.charting.charts.PieChart>(R.id.chart1)
         title = "Übersicht deiner Ausgaben"
 
@@ -95,10 +98,12 @@ class PieChart : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
     private fun setData(count: Int, range: Float) {
         val entries = ArrayList<PieEntry>()
 
+        // TODO: Load the data from the database
         val parties = arrayOf(
             "Lebensmittel", "Haushalt", "Miete", "Transport", "Ausgehen", "Kleidung", "Studium", "Urlaub"
         )
 
+        // Create and add the chart entries
         for (i in 0 until count) {
             entries.add(
                 PieEntry(
@@ -110,40 +115,31 @@ class PieChart : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         val dataSet = PieDataSet(entries, "Kategorien")
 
         dataSet.setDrawIcons(false)
-
         dataSet.sliceSpace = 3f
-        // dataSet.iconsOffset = MPPointF(0, 0)
         dataSet.selectionShift = 5f
-
 
         // add a lot of colors
         val colors = ArrayList<Int>()
-
         for (c in ColorTemplate.VORDIPLOM_COLORS) colors.add(c)
-
         for (c in ColorTemplate.JOYFUL_COLORS) colors.add(c)
-
         for (c in ColorTemplate.COLORFUL_COLORS) colors.add(c)
-
         for (c in ColorTemplate.LIBERTY_COLORS) colors.add(c)
-
         for (c in ColorTemplate.PASTEL_COLORS) colors.add(c)
-
         colors.add(ColorTemplate.getHoloBlue())
 
         dataSet.colors = colors
-        //dataSet.setSelectionShift(0f);
 
+        // define how the text is shown
         val data = PieData(dataSet)
         data.setValueFormatter(PercentFormatter())
         data.setValueTextSize(11f)
         data.setValueTextColor(Color.BLACK)
-         data.setValueTypeface(tfLight)
+        data.setValueTypeface(tfLight)
         chart.data = data
 
-        // undo all highlights
+        // Disable all highlights
         chart.highlightValues(null)
-
+        // Redraw the chart
         chart.invalidate()
     }
 
@@ -163,5 +159,4 @@ class PieChart : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLis
         }
         return true
     }
-
 }
