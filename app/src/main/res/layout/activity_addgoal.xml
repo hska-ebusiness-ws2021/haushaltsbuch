@@ -27,27 +27,21 @@
             android:textIsSelectable="false"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/button_save_Goals"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/button_back"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button_save_Goals"
+            android:id="@+id/button_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:gravity="center_horizontal"
-            android:text="Save"
-            android:textAlignment="center"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:textColor="@color/black"
-            android:textColorHighlight="#CED2EC"
-            app:backgroundTint="#FFA630"
+            android:text="Zurück"
+            app:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            />
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -210,6 +204,43 @@
         app:layout_constraintStart_toEndOf="@id/imageDate"
         app:layout_constraintTop_toBottomOf="@id/textEnd"
         tools:text="Sun, 27 May 19:30" />
+    <Button
+        android:id="@+id/button_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Abbrechen"
+        android:textAlignment="center"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:textColor="@color/white"
+        android:textColorHighlight="#CED2EC"
+        app:backgroundTint="@color/gray_400"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_save"
+        app:layout_constraintHorizontal_bias="0.204"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/endDate"
+        app:layout_constraintVertical_bias="0.918" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Speichern"
+        android:textAlignment="center"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:textColor="@color/white"
+        android:textColorHighlight="#CED2EC"
+        app:backgroundTint="@color/colorAccent"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintStart_toEndOf="@id/button_cancel"
+        app:layout_constraintTop_toBottomOf="@id/endDate"
+        app:layout_constraintVertical_bias="0.918" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
