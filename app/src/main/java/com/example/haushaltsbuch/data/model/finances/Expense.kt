@@ -15,7 +15,6 @@ import org.joda.time.DateTime
 object Expenses : Table() {
     var id: Column<UUID> = uuid("id")
     var amount: Column<BigDecimal> = decimal("amount", 8, 2)
-
     var title: Column<String> = varchar("title", 255)
     var category: Column<String> = reference("category", Categories.name)
 
