@@ -36,6 +36,7 @@ class ExpenseOverview : Fragment() {
         }
 
         if(savedInstanceState == null){
+            // adding the expense list a child fragment
             childFragmentManager.commit {
                 setReorderingAllowed(true)
                 add<ExpenseFragment>(R.id.expense_container)
@@ -56,6 +57,7 @@ class ExpenseOverview : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // create button to switch to create options fragment
         val createExpense: FloatingActionButton = view.findViewById(R.id.overview_create_expense)
         createExpense.setOnClickListener{
             parentFragmentManager.commit {
@@ -63,6 +65,7 @@ class ExpenseOverview : Fragment() {
                 replace<HomeFragement>(R.id.fragment_containter) }
         }
 
+        // set text as current month
         val monthText: TextView = view.findViewById(R.id.overview_month)
         val cal = Calendar.getInstance()
         val month_date = SimpleDateFormat("MMMM", Locale.GERMAN)

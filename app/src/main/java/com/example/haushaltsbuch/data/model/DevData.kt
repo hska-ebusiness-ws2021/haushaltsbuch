@@ -9,6 +9,9 @@ import java.math.BigDecimal
 import java.util.*
 import kotlin.random.Random
 
+/**
+ * creates a mocked Data object
+ */
 class DevData(
     private var categoryCount: Int = 10,
     private var achievementCount: Int = 20,
@@ -42,6 +45,7 @@ class DevData(
             firstname = name,
             lastname = surname,
             email = "$name.$surname@$domain.de",
+            // one user per person
             user = users[index]
         )
 
@@ -56,6 +60,7 @@ class DevData(
 
     private fun generateCustomer(index: Int): Customer {
         return Customer(
+            // turn the starting people into customers
             id = people[index].id,
             email = people[index].email,
             firstname = people[index].firstname,
@@ -69,6 +74,7 @@ class DevData(
                 Random.nextInt(1, 24),
                 Random.nextInt(1, 60)
             ),
+            // take subscriptions randomly and associate with customers
             subscription = subscriptions[Random.nextInt(0, subscriptions.size - 1)],
             achievements = mutableListOf()
         )
@@ -91,7 +97,9 @@ class DevData(
         )
     }
 
-    private fun generateExpenseList(index: Int): List<Expense> {
+    // used later to generate a list of expense lists
+    private fun generateExpenseList(index: Int): List<Expense>{
+        // generate a List of Expenses the size of customerCount
         return List(customerCount, this.generateExpense(index))
     }
 
@@ -106,6 +114,7 @@ class DevData(
                 amount = BigDecimal(amount),
                 //points = amount / 10,
                 title = "",
+                // take a random expense category and assign it to expense
                 category = expenseCategories[Random.nextInt(0, expenseCategories.size - 1)],
                 //person = people[customerIndex],
                 date = DateTime(
@@ -136,7 +145,9 @@ class DevData(
         return Offer(
             id = UUID.randomUUID(),
             description = "Tisch",
+            // one pricemodel per offer
             priceModel = pricemodels[index],
+            // the last people in people list are companies, which can make consulting offers
             person = people[Random.nextInt(customerCount - 1, peopleCount - 1)]
         )
     }
@@ -155,7 +166,9 @@ class DevData(
 
     private fun generateRequest(index: Int): Request {
         return Request(
+            // first people in people are customers, which can make request on offers
             person = people[Random.nextInt(0, customerCount)],
+            // create request randomly for offers
             offer = offers[Random.nextInt(0, offerCount)],
         )
     }

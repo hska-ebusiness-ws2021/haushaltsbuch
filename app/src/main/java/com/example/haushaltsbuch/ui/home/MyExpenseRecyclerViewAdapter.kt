@@ -17,6 +17,7 @@ class MyExpenseRecyclerViewAdapter(
     private val values: List<Expense>
 ) : RecyclerView.Adapter<MyExpenseRecyclerViewAdapter.ViewHolder>() {
 
+    // mocked category names
     val names = listOf<String>("Essen", "Technik", "Games")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,6 +27,7 @@ class MyExpenseRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        // create List item for expense list
         val item = values[position]
         holder.idView.text = names[Random.nextInt(0,2)]
         holder.contentView.text = "${item.amount} EUR"

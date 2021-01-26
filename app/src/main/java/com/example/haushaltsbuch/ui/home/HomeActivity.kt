@@ -30,6 +30,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         setContentView(R.layout.activity_home)
         setSupportActionBar(findViewById(R.id.toolbar))
+        // setup view
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         drawer = findViewById<DrawerLayout>(R.id.drawer)
@@ -45,7 +46,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             // add the routing for remaining elements
+                // routing to pie chart
             R.id.nav_statistics -> {startActivity(Intent(this, PieChart::class.java))}
+            // routing to Expense list
             R.id.nav_home -> {supportFragmentManager.commit { replace<ExpenseOverview>(R.id.fragment_containter)
                 setReorderingAllowed(true)
                 addToBackStack("")
