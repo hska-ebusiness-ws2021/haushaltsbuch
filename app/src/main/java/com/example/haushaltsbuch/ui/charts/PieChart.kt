@@ -1,13 +1,22 @@
 package com.example.haushaltsbuch.ui.charts
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.example.haushaltsbuch.R
+import com.example.haushaltsbuch.ui.home.ExpenseOverview
+import com.example.haushaltsbuch.ui.home.HomeActivity
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -15,19 +24,30 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
-class PieChart : AppCompatActivity() {
+class PieChart : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var chart: com.github.mikephil.charting.charts.PieChart
     private var tf: Typeface? = null
     protected var tfLight: Typeface? = null
+    private var drawer: DrawerLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pie_chart)
-        setSupportActionBar(findViewById(R.id.toolbar))
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        drawer = findViewById<DrawerLayout>(R.id.drawer)
+        val sidenav: NavigationView = findViewById(R.id.sidenav)
+        sidenav.setNavigationItemSelectedListener(this)
+        val toggle: ActionBarDrawerToggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer?.addDrawerListener(toggle)
+        toggle.syncState()
+
         tfLight = Typeface.createFromAsset(assets, "OpenSans-Light.ttf")
         findViewById<FloatingActionButton>(R.id.button_add).setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -160,6 +180,16 @@ class PieChart : AppCompatActivity() {
         s.setSpan(StyleSpan(Typeface.ITALIC), 0, s.length, 0)
         s.setSpan(ForegroundColorSpan(ColorTemplate.getHoloBlue()), 0, s.length, 0)
         return s
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            // add the routing for remaining elements
+            R.id.nav_statistics -> {startActivity(Intent(this, PieChart::class.java))}
+            R.id.nav_home -> {startActivity(Intent(this, HomeActivity::class.java))
+            }
+        }
+        return true
     }
 
 }
