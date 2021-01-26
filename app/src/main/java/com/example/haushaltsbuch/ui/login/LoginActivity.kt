@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                 updateUiWithUser(loginResult.success)
             }
             setResult(Activity.RESULT_OK)
-
+            // switch to home if successfully logged in
             val homeActivity = Intent(this, HomeActivity::class.java)
             startActivity(homeActivity)
             //Complete and destroy login activity once successful

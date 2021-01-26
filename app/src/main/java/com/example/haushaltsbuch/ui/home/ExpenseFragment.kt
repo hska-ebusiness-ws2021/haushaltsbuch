@@ -18,6 +18,7 @@ import com.example.haushaltsbuch.data.model.finances.Expense
 class ExpenseFragment : Fragment() {
 
     private var columnCount = 1
+    // Data mocking
     private val fakeData = DevData(2, 1, 1, 2)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +42,7 @@ class ExpenseFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
+                // reading only the expense data form mocked data
                 adapter = MyExpenseRecyclerViewAdapter(fakeData.expenses[0])
             }
         }
