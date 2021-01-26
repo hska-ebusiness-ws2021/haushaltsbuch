@@ -17,18 +17,19 @@ import com.example.haushaltsbuch.database.DBHelper
 import com.example.haushaltsbuch.databinding.ContentAddEditExpenseBinding
 import com.example.haushaltsbuch.ui.DatePickerFragment
 import com.example.haushaltsbuch.ui.home.HomeActivity
-import com.example.haushaltsbuch.ui.login.LoginActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
 import org.joda.time.DateTime
 import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
-
+/*
+ Activity to add expenses
+ */
 class AddEditExpense : AppCompatActivity() {
     private val model: AddExpenseViewModel by viewModels()
 
-    val parties = arrayOf(
+    val categories = arrayOf(
         "Lebensmittel",
         "Haushalt",
         "Miete",
@@ -46,8 +47,6 @@ class AddEditExpense : AppCompatActivity() {
         binding = ContentAddEditExpenseBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-
         setContentView(R.layout.content_add_edit_expense)
         setSupportActionBar(findViewById(R.id.toolbar))
 
@@ -68,14 +67,15 @@ class AddEditExpense : AppCompatActivity() {
         val title = findViewById<TextView>(R.id.titleExpenses)
         // ===================================================================
 
+        val expenseAdapter = ExpenseListAdapter(model.expenseCategorieList)
 
-        val expenseAdapter = CategoryAdapter(model.expenseCategorieList)
         recyclerView.adapter = expenseAdapter
 
-
-        val arrayTags = ArrayAdapter(this, android.R.layout.simple_spinner_item, parties)
+        // Bind available categories to the spinner
+        val arrayTags = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
         spinner.adapter = arrayTags
 
+        // Switch the UI to "Einnahmen" by hidding the elements
         val isEinnahme: Boolean = intent.getBooleanExtra(IS_EINNAHMEN, false)
         if (isEinnahme) {
             category.visibility = GONE
@@ -85,14 +85,16 @@ class AddEditExpense : AppCompatActivity() {
             title.text = "Einnahmen"
         }
 
-        model.date.observe(this, Observer {
-            val format = SimpleDateFormat("MMM dd.yyyy")
-            date.text = format.format(it)
-        })
 
         // ===================================================================
         //                   Bind Listeners to UI elements
         // ===================================================================
+
+        // Update the select date on the UI
+        model.date.observe(this, Observer {
+            val format = SimpleDateFormat("MMM dd.yyyy")
+            date.text = format.format(it)
+        })
 
         addButton.setOnClickListener {
             model.addExpenseCategorieEntry(
@@ -105,6 +107,7 @@ class AddEditExpense : AppCompatActivity() {
             expenseAdapter.notifyDataSetChanged()
         }
 
+        // Save the input and close the activity
         saveButton.setOnClickListener {
             try {
                 val id = UUID.randomUUID()

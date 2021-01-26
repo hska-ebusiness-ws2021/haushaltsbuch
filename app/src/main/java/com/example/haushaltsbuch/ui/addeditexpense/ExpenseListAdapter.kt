@@ -7,9 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.haushaltsbuch.R
 
-
-class CategoryAdapter(private val dataSet: ArrayList<TextWithAmount>) :
-    RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
+/*
+ Provide the expenses as list entries
+ */
+class ExpenseListAdapter(private val dataSet: ArrayList<TextWithAmount>) :
+    RecyclerView.Adapter<ExpenseListAdapter.ViewHolder>() {
 
     /**
      * Provide a reference to the type of views that you are using
